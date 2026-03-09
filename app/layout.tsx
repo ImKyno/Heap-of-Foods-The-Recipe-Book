@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   publisher: "Kyno",
   icons: {
     icon: [
-      { url: "/icons/icon_hof.png", sizes: "any", type: "image/png" },
+      { url: "/icons/misc/icon_hof.png", sizes: "any", type: "image/png" },
     ],
     apple: [
-      { url: "/icons/icon_hof.png", sizes: "any", type: "image/png" },
+      { url: "/icons/misc/icon_hof.png", sizes: "any", type: "image/png" },
     ],
   },
 };

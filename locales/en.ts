@@ -1,6 +1,5 @@
 const en = {
   main: {
-    homepage: "Home Page",
     close: "Back",
     backtotop: "Back to Top",
     cookpot: "Crock Pot",
@@ -10,7 +9,10 @@ const en = {
   },
 
   search: {
-    title: "Browse recipe...",
+    title: {
+      recipe: "Browse recipe...",
+      ingredient: "Browse ingredient...",
+    },
     notfound: "No recipe found with that name.",
   },
 
@@ -48,6 +50,7 @@ const en = {
     title: "Filters",
     temperature: "Temperatures",
     foodtype: "Food Types",
+    cooktype: "Ingredient Types",
     debuff: {
       title: "Side Effects",
       hasdebuff: "Has Side Effect",
@@ -86,10 +89,12 @@ const en = {
     stacksize: "Cooking Stack",
     temperature: "Temperature",
     foodtype: "Food Type",
+    cooktype: "Ingredient Type",
     debuff: "Side Effect",
   },
 
   foodtypes: {
+    RAW: "Raw",
     VEGGIE: "Veggie",
     MEAT: "Meat",
     MONSTER: "Monster",
@@ -102,6 +107,50 @@ const en = {
     PREPAREDPOOP: "Horrible",
     PREPAREDSOUL: "Soul",
     ALCOHOLIC: "Alcoholic",
+  },
+
+  cooktypes : {
+    SEED: "Seeds",
+    VEGGIE: "Veggie",
+    FRUIT: "Fruit",
+    MEAT: "Meat",
+    FISH: "Fish",
+    MONSTER: "Monster",
+    SWEETENER: "Sweetener",
+    FAT: "Fat",
+    DAIRY: "Dairy",
+    BUTTER: "Butter",
+    SYRUP: "Syrup",
+    SUGAR: "Sugar",
+    CHOCOLATE: "Chocolate",
+    BREAD: "Bread",
+    CHEESE: "Cheese",
+    SPOTSPICE: "Spot Spice",
+    EGG: "Egg",
+    FROZEN: "Frozen",
+    DECORATION: "Decoration",
+    INEDIBLE: "Inedible",
+    MAGIC: "Magic",
+    DRIED: "Dried",
+    GEARS: "Gears",
+    JUNK: "Junk",
+    ELEMENTAL: "Elemental",
+    FOLIAGE: "Foliage",
+    SUCCULENT: "Succulent",
+    POOP: "Poop",
+    BOSS: "Giant",
+    ALGAE: "Algae",
+    MILK: "Milk",
+    BERRIES: "Berries",
+    MUSHROOM: "Mushroom",
+    SOUL: "Soul",
+    OIL: "Oil",
+    PIKO: "Piko",
+    LEAF: "Leaf",
+    SALTED: "Salted",
+    MAYONNAISE: "Mayonnaise",
+    LUNAR: "Lunar",
+    SHADOW: "Shadow",
   },
 
   spoilagetime: {
@@ -350,6 +399,12 @@ const en = {
     chickenwings: "Stimulates aggression",
     chickenrotisserie: "Decreases hunger loss",
     jawsbreaker: "Allures ocean creatures"
+  },
+
+  ingredients: {
+    aloe: "Aloe",
+    aloe_cooked: "Cooked Aloe",
+    aloe_dried: "Dried Aloe",
   }
 }
 

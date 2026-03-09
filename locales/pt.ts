@@ -1,6 +1,5 @@
 const pt = {
   main: {
-    homepage: "Página Principal",
     close: "Retornar",
     backtotop: "Retornar ao Topo",
     cookpot: "Panela",
@@ -10,7 +9,10 @@ const pt = {
   },
 
   search: {
-    title: "Pesquisar receita...",
+    title: {
+      recipe: "Pesquisar receita...",
+      ingredient: "Pesquisar ingrediente...",
+    },
     notfound: "Nenhuma receita com este nome foi encontrada.",
   },
 
@@ -47,7 +49,8 @@ const pt = {
   filters: {
     title: "Filtros",
     temperature: "Temperaturas",
-    foodtype: "Tipos da Receita",
+    foodtype: "Tipos de Receita",
+    cooktype: "Tipos de Ingrediente",
     debuff: {
       title: "Efeito Especiais",
       hasdebuff: "Possui Efeito Especial",
@@ -86,10 +89,12 @@ const pt = {
     stacksize: "Pilha de Cozimento",
     temperature: "Temperatura",
     foodtype: "Tipo da Receita",
+    cooktype: "Tipo do Ingrediente",
     debuff: "Efeito Especial",
   },
 
   foodtypes: {
+    RAW: "Cru",
     VEGGIE: "Vegetal",
     MEAT: "Carne",
     MONSTER: "Monstro",
@@ -102,6 +107,50 @@ const pt = {
     PREPAREDPOOP: "Horrível",
     PREPAREDSOUL: "Alma",
     ALCOHOLIC: "Alcoólico",
+  },
+
+  cooktypes : {
+    SEED: "Seeds",
+    VEGGIE: "Veggie",
+    FRUIT: "Fruit",
+    MEAT: "Meat",
+    FISH: "Fish",
+    MONSTER: "Monster",
+    SWEETENER: "Sweetener",
+    FAT: "Fat",
+    DAIRY: "Dairy",
+    BUTTER: "Butter",
+    SYRUP: "Syrup",
+    SUGAR: "Sugar",
+    CHOCOLATE: "Chocolate",
+    BREAD: "Bread",
+    CHEESE: "Cheese",
+    SPOTSPICE: "Spot Spice",
+    EGG: "Egg",
+    FROZEN: "Frozen",
+    DECORATION: "Decoration",
+    INEDIBLE: "Inedible",
+    MAGIC: "Magic",
+    DRIED: "Dried",
+    GEARS: "Gears",
+    JUNK: "Junk",
+    ELEMENTAL: "Elemental",
+    FOLIAGE: "Foliage",
+    SUCCULENT: "Succulent",
+    POOP: "Poop",
+    BOSS: "Giant",
+    ALGAE: "Algae",
+    MILK: "Milk",
+    BERRIES: "Berries",
+    MUSHROOM: "Mushroom",
+    SOUL: "Soul",
+    OIL: "Oil",
+    PIKO: "Piko",
+    LEAF: "Leaf",
+    SALTED: "Salted",
+    MAYONNAISE: "Mayonnaise",
+    LUNAR: "Lunar",
+    SHADOW: "Shadow",
   },
 
   spoilagetime: {
@@ -350,6 +399,11 @@ const pt = {
     chickenwings: "Estimula a agressão",
     chickenrotisserie: "Desacelera a fome",
     jawsbreaker: "Atrai criaturas do oceano"
+  },
+
+  ingredients: {
+    aloe: "Aloe",
+    aloe_cooked: "Cooked Aloe",
   }
 }
 

@@ -1,0 +1,13 @@
+[
+    {
+        "name": "aloe",
+        "cooked": true,
+        "dried": true,
+        "foodtype": "VEGGIE",
+        "cooktype": ["VEGGIE", "SUCCULENT"],
+        "spoilage": 4800,
+        "health": 1,
+        "hunger": 6.375,
+        "sanity": 0
+    }
+]

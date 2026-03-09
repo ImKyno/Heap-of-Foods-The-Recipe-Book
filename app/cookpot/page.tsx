@@ -235,7 +235,7 @@ export default function CookPot() {
   // HIDE BACK TO TOP BUTTON
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 1000) {
         setShowTopButton(true);
       } else {
         setShowTopButton(false);
@@ -405,7 +405,7 @@ export default function CookPot() {
                   <div className="w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
                     <DropdownGroup
                       title={t("filters.temperature")}
-                      icon="/icons/icon_temperature.png"
+                      icon="/icons/cooking/icon_temperature.png"
                     >
                       <CheckboxFilter
                         label={t("card.temperature.hot")}
@@ -434,7 +434,7 @@ export default function CookPot() {
 
                     <DropdownGroup
                       title={t("filters.foodtype")}
-                      icon="/icons/icon_foodtype.png"
+                      icon="/icons/cooking/icon_foodtype.png"
                     >
                       {[...new Set(recipes.map((r: any) => r.foodtype))]
                         .filter(Boolean)
@@ -458,7 +458,7 @@ export default function CookPot() {
 
                     <DropdownGroup
                       title={t("filters.debuff.title")}
-                      icon="/icons/icon_debuff.png"
+                      icon="/icons/cooking/icon_debuff.png"
                     >
                       <CheckboxFilter
                         label={t("filters.debuff.hasdebuff")}
@@ -489,7 +489,7 @@ export default function CookPot() {
                   <div className="w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
                     <DropdownGroup
                       title={t("sorting.directiontype")}
-                      icon="/icons/icon_priority.png"
+                      icon="/icons/cooking/icon_priority.png"
                     >
                       <CheckboxFilter
                         label={t("sorting.direction.up")}
@@ -507,7 +507,7 @@ export default function CookPot() {
 
                     <DropdownGroup
                       title={t("sorting.ordertype")}
-                      icon="/icons/icon_debuff.png"
+                      icon="/icons/cooking/icon_debuff.png"
                     >
                       <CheckboxFilter
                         label={t("sorting.type.default")}
@@ -587,7 +587,7 @@ export default function CookPot() {
               {recipe.foodtype && <FoodType type={recipe.foodtype} t={t} />}
               {recipe.temperature != null && (
                 <TopEffect
-                  icon="/icons/icon_temperature.png"
+                  icon="/icons/cooking/icon_temperature.png"
                   value={
                     recipe.temperature > 0
                       ? t("card.temperature.hot")
@@ -598,7 +598,7 @@ export default function CookPot() {
               )}
               {recipe.debuff && (
                 <TopEffect
-                  icon="/icons/icon_debuff.png"
+                  icon="/icons/cooking/icon_debuff.png"
                   value={t("card.debuff.hasEffect")}
                   tooltip={t("tooltips.debuff")}
                 />
@@ -657,7 +657,7 @@ export default function CookPot() {
 
               {selected.temperature != null && (
                 <TopEffect
-                  icon="/icons/icon_temperature.png"
+                  icon="/icons/cooking/icon_temperature.png"
                   value={FormatTemperature(
                     selected.temperature,
                     selected.temperatureDuration,
@@ -668,7 +668,7 @@ export default function CookPot() {
 
               {selected.debuff && (
                 <TopEffect
-                  icon="/icons/icon_debuff.png"
+                  icon="/icons/cooking/icon_debuff.png"
                   value={t(`recipes_debuff.${selected.name}`)}
                   tooltip={t("tooltips.debuff")}
                 />
@@ -678,19 +678,19 @@ export default function CookPot() {
             {/* STATUS */}
             <Block>
               <Stat
-                icon="/icons/icon_health.png"
+                icon="/icons/cooking/icon_health.png"
                 value={selected.health}
                 tooltip={t("tooltips.health")}
                 isStatus
               />
               <Stat
-                icon="/icons/icon_hunger.png"
+                icon="/icons/cooking/icon_hunger.png"
                 value={selected.hunger}
                 tooltip={t("tooltips.hunger")}
                 isStatus
               />
               <Stat
-                icon="/icons/icon_sanity.png"
+                icon="/icons/cooking/icon_sanity.png"
                 value={selected.sanity}
                 tooltip={t("tooltips.sanity")}
                 isStatus
@@ -699,17 +699,17 @@ export default function CookPot() {
 
             <Block>
               <Stat
-                icon="/icons/icon_priority.png"
+                icon="/icons/cooking/icon_priority.png"
                 value={selected.priority}
                 tooltip={t("tooltips.priority")}
               />
               <Stat
-                icon="/icons/icon_cooktime.png"
+                icon="/icons/cooking/icon_cooktime.png"
                 value={FormatCookTime(selected.cooktime)}
                 tooltip={t("tooltips.cooktime")}
               />
               <Stat
-                icon="/icons/icon_spoilage.png"
+                icon="/icons/cooking/icon_spoilage.png"
                 value={GetSpoilageLabel(selected.spoilage)}
                 tooltip={t("tooltips.spoilage")}
               />
@@ -718,7 +718,7 @@ export default function CookPot() {
             {selected.stacksize && (
               <Block>
                 <Stat
-                  icon="/icons/icon_stacksize.png"
+                  icon="/icons/cooking/icon_stacksize.png"
                   value={selected.stacksize}
                   tooltip={t("tooltips.stacksize")}
                 />
@@ -849,7 +849,7 @@ function Stat({ icon, value, tooltip, isStatus = false }: any) {
 function FoodType({ type, t }: { type: string; t: (key: string) => string }) {
   return (
     <div className="relative group flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-xs tracking-wide cursor-default">
-      <img src="/icons/icon_foodtype.png" className="w-5 h-5 object-contain" />
+      <img src="/icons/cooking/icon_foodtype.png" className="w-5 h-5 object-contain" />
       <span className="text-zinc-900 dark:text-white">
         {t(`foodtypes.${type}`)}
       </span>
