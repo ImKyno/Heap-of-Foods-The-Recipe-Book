@@ -1,6 +1,5 @@
 local kyno_foods_seasonal =
 {
-	-- Winter's Feast Foods.
 	festive_berrysauce =
 	{
 		test = function(cooker, names, tags) return (tags.berries and tags.berries >= 2) and tags.sweetener == 2 
@@ -362,8 +361,7 @@ local kyno_foods_seasonal =
 		tags = {"xmas"},
 		card_def = {ingredients = {{"meat", 1}, {"kyno_flour", 1}, {"kyno_bacon", 1}, {"potato", 1}}},
 	},
-	
-	-- Hallowed Nights Foods.
+
 	spooky_brain_noodles =
 	{
 		test = function(cooker, names, tags) return tags.flour and tags.spotspice and tags.beanbug and tags.meat 
@@ -464,7 +462,7 @@ local kyno_foods_seasonal =
 		health = 40,
 		hunger = 12.5,
 		sanity = -20,
-		cooktime = .10,
+		cooktime = 1.0,
 		potlevel = "med",
 		overridebuild = "kyno_foodrecipes_seasonal_spooky",
 		floater = TUNING.HOF_FLOATER,

@@ -1343,20 +1343,6 @@ local kyno_foods_keg =
 			end
 		end,
 	},
-
-	wetgoop2 =
-	{
-		test = function(brewer, names, tags) return true end,
-		priority = -2,
-		perishtime = TUNING.PERISH_FAST,
-		health = 0,
-		hunger = 0,
-		sanity = 0,
-		cooktime = 1,
-		isfertilizer = true,
-		nutrients = {32, 8, 8},
-        floater = {"small", nil, nil},
-	},
 }
 
 for k, recipe in pairs(kyno_foods_keg) do

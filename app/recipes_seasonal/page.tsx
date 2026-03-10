@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useTranslation } from "@/lib/i18n";
-import recipes from "@/data/recipes_cookpot_keg.json";
+import recipes from "@/data/recipes_cookpot_seasonal.json";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -78,7 +78,7 @@ const SortOption = ({ value, label, current, onChange }: SortOptionProps) => (
   </label>
 );
 
-export default function CookPotKeg() {
+export default function CookPotSeasonal() {
   const { t } = useTranslation();
 
   const SPOILAGE_LABELS = useMemo(
@@ -135,6 +135,12 @@ export default function CookPotKeg() {
     return `${sign}${tempValue} ${t("time.for")} ${timeString}`;
   };
 
+  const GetFoodEvent = (name: string) => {
+    if (name.startsWith("festive_")) return "xmas";
+    if (name.startsWith("spooky_")) return "halloween";
+    return null;
+  };
+
   const [selected, setSelected] = useState<any>(null);
 
   const [showTopButton, setShowTopButton] = useState(false);
@@ -148,6 +154,7 @@ export default function CookPotKeg() {
   const [filterTemp, setFilterTemp] = useState<string | null>(null);
   const [filterDebuff, setFilterDebuff] = useState<boolean | null>(null);
   const [filterFoodType, setFilterFoodType] = useState<string[]>([]);
+  const [filterEvent, setFilterEvent] = useState<string[]>([]);
 
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -170,6 +177,10 @@ export default function CookPotKeg() {
     if (filterFoodType.length > 0) {
       if (!filterFoodType.includes(recipe.foodtype)) return false;
     }
+    if (filterEvent.length > 0) {
+      const event = GetFoodEvent(recipe.name);
+      if (!event || !filterEvent.includes(event)) return false;
+    }
     return true;
   });
 
@@ -186,8 +197,8 @@ export default function CookPotKeg() {
       let valB: any;
       switch (sortType) {
         case "alphabet":
-          valA = t(`recipes_keg.${a.name}`) ?? "";
-          valB = t(`recipes_keg.${b.name}`) ?? "";
+          valA = t(`recipes_seasonal.${a.name}`) ?? "";
+          valB = t(`recipes_seasonal.${b.name}`) ?? "";
           return valA.localeCompare(valB) * directionMultiplier;
         case "spoilage":
           valA = a.spoilage ?? 0;
@@ -208,7 +219,7 @@ export default function CookPotKeg() {
     if (!search.trim()) return [];
     return sortedRecipes
       .filter((recipe: any) =>
-        t(`recipes_keg.${recipe.name}`)
+        t(`recipes_seasonal.${recipe.name}`)
           .toLowerCase()
           .includes(search.toLowerCase()),
       )
@@ -337,11 +348,11 @@ export default function CookPotKeg() {
                       }`}
                     >
                       <img
-                        src={`/foods_cookpot_keg/${recipe.name}.png`}
+                        src={`/foods_cookpot_seasonal/${recipe.name}.png`}
                         className="w-10 h-10 object-contain"
                       />
                       <span className="text-sm font-semibold">
-                        {t(`recipes_keg.${recipe.name}`)}
+                        {t(`recipes_seasonal.${recipe.name}`)}
                       </span>
                     </div>
                   ))}
@@ -474,11 +485,34 @@ export default function CookPotKeg() {
 
                     <div className="w-full h-1 bg-zinc-700/20 dark:bg-white/20" />
 
+                    <DropdownGroup
+                      title={t("filters.event")}
+                      icon="/icons/cooking/icon_event.png"
+                    >
+                      {["xmas", "halloween"].map((event) => (
+                      <CheckboxFilter
+                        key={event}
+                        label={t(`card.event.${event}`)}
+                        checked={filterEvent.includes(event)}
+                        onChange={() =>
+                          setFilterEvent((prev) =>
+                          prev.includes(event)
+                            ? prev.filter((e) => e !== event)
+                            : [...prev, event]
+                            )
+                          }
+                        />
+                      ))}
+                    </DropdownGroup>
+
+                    <div className="w-full h-1 bg-zinc-700/20 dark:bg-white/20" />
+
                     <button
                       onClick={() => {
                         setFilterTemp(null);
                         setFilterFoodType([]);
                         setFilterDebuff(null);
+                        setFilterEvent([]);
                       }}
                       className="bg-zinc-300 dark:bg-zinc-500 hover:bg-red-700 rounded-lg py-2 text-sm font-bold cursor-pointer"
                     >
@@ -605,9 +639,9 @@ export default function CookPotKeg() {
             onClick={() => setSelected(recipe)}
             className="bg-white dark:bg-zinc-900 rounded-2xl p-3 flex flex-col items-center gap-3 cursor-pointer hover:scale-105 transition shadow-sm dark:shadow-none"
           >
-            <img src={`/foods_cookpot_keg/${recipe.name}.png`} className="w-24" />
+            <img src={`/foods_cookpot_seasonal/${recipe.name}.png`} className="w-24" />
             <h2 className="text-center font-semibold text-lg text-zinc-900 dark:text-white">
-              {t(`recipes_keg.${recipe.name}`)}
+              {t(`recipes_seasonal.${recipe.name}`)}
             </h2>
 
             <div className="flex items-center gap-2 flex-wrap justify-center">
@@ -628,6 +662,13 @@ export default function CookPotKeg() {
                   icon="/icons/cooking/icon_debuff.png"
                   value={t("card.debuff.hasEffect")}
                   tooltip={t("tooltips.debuff")}
+                />
+              )}
+              {GetFoodEvent(recipe.name) && (
+                <TopEffect
+                  icon="/icons/cooking/icon_event.png"
+                  value={t(`card.event.${GetFoodEvent(recipe.name)}`)}
+                  tooltip={t("tooltips.event")}
                 />
               )}
             </div>
@@ -666,12 +707,12 @@ export default function CookPotKeg() {
             </div>
 
             <img
-              src={`/foods_cookpot_keg/${selected.name}.png`}
+              src={`/foods_cookpot_seasonal/${selected.name}.png`}
               className="w-32 mx-auto mb-4"
             />
 
             <h2 className="text-center text-2xl font-semibold">
-              {t(`recipes_keg.${selected.name}`)}
+              {t(`recipes_seasonal.${selected.name}`)}
             </h2>
 
             <div className="flex justify-center my-4">
@@ -698,6 +739,14 @@ export default function CookPotKeg() {
                   icon="/icons/cooking/icon_debuff.png"
                   value={t(`recipes_debuff.${selected.name}`)}
                   tooltip={t("tooltips.debuff")}
+                />
+              )}
+
+              {GetFoodEvent(selected.name) && (
+                <TopEffect
+                  icon="/icons/cooking/icon_event.png"
+                  value={t(`card.event.${GetFoodEvent(selected.name)}`)}
+                  tooltip={t("tooltips.event")}
                 />
               )}
             </div>

@@ -1,11 +1,199 @@
--- Informations about these foods:
--- Cooktimes: 24 = 1 Day. | 48 = 2 Days. | 72 = 3 Days. | 120 = 5 Days. | 168 = 7 Days. | 240 = 10 Days. | 360 = 15 Days. | 480 = 20 Days.
--- These recipes don't appear in the Cookbook since they're "special" and not from the Crcok Pot.
--- They took several days to produce, just like the real life / Stardew Valley mechanics.
-
 local kyno_foods_jar =
 {
-	-- Preserves Jar Recipes.
+	mayonnaise = 
+	{
+		test = function(brewer, names, tags) return tags.egg and tags.oil and names.kyno_salt
+		and not tags.chickenegg and not names.tallbirdegg and not names.nightmarefuel end,
+		priority = 30,
+		foodtype = FOODTYPE.GOODIES,
+		perishtime = TUNING.PERISH_SLOW,
+		health = 10,
+		hunger = 12.5,
+		sanity = 15,
+		cooktime = 24,
+		scale = .90,
+		nameoverride = "KYNO_MAYONNAISE",
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"bird_egg", 1}, {"kyno_oil", 1}, {"kyno_salt", 1}}},
+		prefabs = { "kyno_hungerregenbuff" },
+        oneatenfn = function(inst, eater)
+            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
+        end,
+	},
+	
+	mayonnaise_chicken = 
+	{
+		test = function(brewer, names, tags) return tags.chickenegg and tags.oil and names.kyno_salt and not names.nightmarefuel end,
+		priority = 30,
+		foodtype = FOODTYPE.GOODIES,
+		perishtime = TUNING.PERISH_SLOW,
+		health = 0,
+		hunger = 25,
+		sanity = 25,
+		cooktime = 24,
+		scale = .90,
+		nameoverride = "KYNO_MAYONNAISE",
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_chicken_egg", 1}, {"kyno_oil", 1}, {"kyno_salt", 1}}},
+		prefabs = { "kyno_hungerregenbuff" },
+        oneatenfn = function(inst, eater)
+            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
+        end,
+	},
+	
+	mayonnaise_tallbird = 
+	{
+		test = function(brewer, names, tags) return names.tallbirdegg and tags.oil and names.kyno_salt and not names.nightmarefuel end,
+		priority = 30,
+		foodtype = FOODTYPE.GOODIES,
+		perishtime = TUNING.PERISH_SLOW,
+		health = 30,
+		hunger = 12.5,
+		sanity = 5,
+		cooktime = 24,
+		scale = .90,
+		nameoverride = "KYNO_MAYONNAISE",
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"tallbirdegg", 1}, {"kyno_oil", 1}, {"kyno_salt", 1}}},
+		prefabs = { "kyno_hungerregenbuff" },
+        oneatenfn = function(inst, eater)
+            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
+        end,
+	},
+	
+	mayonnaise_nightmare =
+	{
+		test = function(brewer, names, tags) return tags.egg and names.nightmarefuel and names.kyno_salt end,
+		priority = 35,
+		foodtype = FOODTYPE.GOODIES,
+		perishtime = TUNING.PERISH_SUPERSLOW,
+		health = 30,
+		hunger = 62.5,
+		sanity = -5,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_MAYONNAISE",
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_DESANITY,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"bird_egg", 1}, {"nightmarefuel", 1}, {"kyno_salt", 1}}},
+		prefabs = { "kyno_insanitybuff" },
+        oneatenfn = function(inst, eater)
+            eater:AddDebuff("kyno_insanitybuff", "kyno_insanitybuff")
+        end,
+	},
+	
+	tartarsauce = 
+	{
+		test = function(brewer, names, tags) return tags.mayonnaise and tags.spotspice and names.kyno_cucumber and not names.mayonnaise_nightmare end,
+		priority = 30,
+		foodtype = FOODTYPE.GOODIES,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
+		hunger = 62.5,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		luckitem = { luck = -TUNING.KYNO_LUCK_MED },
+		card_def = {ingredients = {{"mayonnaise", 1}, {"kyno_spotspice", 1}, {"kyno_cucumber", 1}}},
+		prefabs = { "kyno_hungerregenbuff" },
+		oneatenfn = function(inst, eater)
+            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
+        end,
+	},
+	
+	butter_beefalo =
+	{
+		test = function(brewer, names, tags) return names.kyno_milk_beefalo and (names.kyno_milk_beefalo == 2) and names.kyno_salt end,
+		priority = 30,
+		foodtype = FOODTYPE.GENERIC,
+		perishtime = TUNING.PERISH_SUPERSLOW,
+		health = 0,
+		hunger = 25,
+		sanity = 40,
+		cooktime = 96,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_milk_beefalo", 2}, {"kyno_salt", 1}}},
+	},
+
+	butter_koalefant =
+	{
+		test = function(brewer, names, tags) return names.kyno_milk_koalefant and (names.kyno_milk_koalefant == 2) and names.kyno_salt end,
+		priority = 30,
+		foodtype = FOODTYPE.GENERIC,
+		perishtime = TUNING.PERISH_SUPERSLOW,
+		health = 20,
+		hunger = 25,
+		sanity = 20,
+		cooktime = 96,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_milk_koalefant", 2}, {"kyno_salt", 1}}},
+	},
+	
+	butter_goat =
+	{
+		test = function(brewer, names, tags) return names.goatmilk and (names.goatmilk == 2) and names.kyno_salt end,
+		priority = 30,
+		foodtype = FOODTYPE.GENERIC,
+		perishtime = TUNING.PERISH_SUPERSLOW,
+		health = 25,
+		hunger = 40,
+		sanity = 0,
+		cooktime = 96,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"goatmilk", 2}, {"kyno_salt", 1}}},
+	},
+	
+	truffleoil =
+	{
+		test = function(brewer, names, tags) return names.kyno_truffles and names.seeds and names.kyno_salt end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_SUPERSLOW,
+		health = -10,
+		hunger = 12.5,
+		sanity = -20,
+		cooktime = 24,
+		stacksize = 2,
+		goldvalue = 10,
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		tags = {"fooddrink", "truffles"},
+		card_def = {ingredients = {{"kyno_truffles", 1}, {"seeds", 1}, {"kyno_salt", 1}}},
+	},
+
+	agedroe_oceanfish_sturgeon =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_oceanfish_sturgeon and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 20,
+		hunger = 37.5,
+		sanity = 33,
+		cooktime = 48,
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_EXQUISITE,
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		tags = {"exquisite"},
+		card_def = {ingredients = {{"kyno_roe_oceanfish_sturgeon", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+		oneatenfn = function(inst, eater)
+
+		end,
+	},
+
 	jelly_berries = 
 	{
 		test = function(brewer, names, tags) return names.berries and (names.berries == 2) and tags.sweetener end,
@@ -72,6 +260,24 @@ local kyno_foods_jar =
 		overridebuild = "kyno_foodrecipes_jar",
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"dragonfruit", 2}, {"honey", 1}}},
+	},
+
+	jelly_banana = 
+	{
+		test = function(brewer, names, tags) return names.kyno_banana and (names.kyno_banana == 2) and tags.sweetener end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 10,
+		hunger = 20,
+		sanity = 33,
+		cooktime = 48,
+		scale = .90,
+		nameoverride = "KYNO_JELLY",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		tags = {"monkeyqueenbribe"},
+		card_def = {ingredients = {{"kyno_banana", 2}, {"honey", 1}}},
 	},
 	
 	jelly_cave_banana = 
@@ -192,23 +398,32 @@ local kyno_foods_jar =
             end
         end,
 	},
-	
-	jelly_banana = 
+
+	jelly_nightberry =
 	{
-		test = function(brewer, names, tags) return names.kyno_banana and (names.kyno_banana == 2) and tags.sweetener end,
+		test = function(brewer, names, tags) return names.ancientfruit_nightvision and (names.ancientfruit_nightvision == 2) and tags.sweetener end,
 		priority = 30,
 		foodtype = FOODTYPE.VEGGIE,
 		perishtime = TUNING.PERISH_MED,
-		health = 10,
-		hunger = 20,
-		sanity = 33,
+		health = 0,
+		hunger = 25,
+		sanity = 10,
 		cooktime = 48,
 		scale = .90,
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NIGHTVISION,
+		nightvision = true,
 		nameoverride = "KYNO_JELLY",
 		overridebuild = "kyno_foodrecipes_jar",
 		floater = TUNING.HOF_FLOATER,
-		tags = {"monkeyqueenbribe"},
-		card_def = {ingredients = {{"kyno_banana", 2}, {"honey", 1}}},
+		card_def = {ingredients = {{"ancientfruit_nightvision", 2}, {"honey", 1}}},
+		prefabs = { "kyno_nightvisionbuff" },
+        oneatenfn = function(inst, eater)
+            eater:AddDebuff("kyno_nightvisionbuff", "kyno_nightvisionbuff")
+			
+			if eater.components.grogginess ~= nil then
+				eater.components.grogginess:MakeGrogginessAtLeast(1.5)
+			end
+        end,
 	},
 	
 	jelly_kokonut = 
@@ -244,32 +459,22 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"kyno_pineapple_halved", 2}, {"honey", 1}}},
 	},
-	
-	jelly_nightberry =
+
+	pickles_cucumber = 
 	{
-		test = function(brewer, names, tags) return names.ancientfruit_nightvision and (names.ancientfruit_nightvision == 2) and tags.sweetener end,
+		test = function(brewer, names, tags) return names.kyno_cucumber and (names.kyno_cucumber == 2) and tags.spotspice end,
 		priority = 30,
 		foodtype = FOODTYPE.VEGGIE,
 		perishtime = TUNING.PERISH_MED,
-		health = 0,
-		hunger = 25,
+		health = 20,
+		hunger = 62.5,
 		sanity = 10,
-		cooktime = 48,
+		cooktime = 72,
 		scale = .90,
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NIGHTVISION,
-		nightvision = true,
-		nameoverride = "KYNO_JELLY",
+		nameoverride = "KYNO_PICKLES",
 		overridebuild = "kyno_foodrecipes_jar",
 		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"ancientfruit_nightvision", 2}, {"honey", 1}}},
-		prefabs = { "kyno_nightvisionbuff" },
-        oneatenfn = function(inst, eater)
-            eater:AddDebuff("kyno_nightvisionbuff", "kyno_nightvisionbuff")
-			
-			if eater.components.grogginess ~= nil then
-				eater.components.grogginess:MakeGrogginessAtLeast(1.5)
-			end
-        end,
+		card_def = {ingredients = {{"kyno_cucumber", 2}, {"kyno_spotspice", 1}}},
 	},
 	
 	pickles_carrot = 
@@ -339,41 +544,7 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"pumpkin", 2}, {"kyno_spotspice", 1}}},
 	},
-	
-	pickles_lichen = 
-	{
-		test = function(brewer, names, tags) return names.cutlichen and (names.cutlichen == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 30,
-		hunger = 15,
-		sanity = -15,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"cutlichen", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_cactus = 
-	{
-		test = function(brewer, names, tags) return (names.cactus_meat or (names.cactus_flower and names.cactus_flower == 2)) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 50,
-		hunger = 25,
-		sanity = -10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"cactus_meat", 2}, {"kyno_spotspice", 1}}},
-	},
-	
+
 	pickles_garlic = 
 	{
 		test = function(brewer, names, tags) return names.garlic and (names.garlic == 2) and tags.spotspice end,
@@ -390,24 +561,7 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"garlic", 2}, {"kyno_spotspice", 1}}},
 	},
-	
-	pickles_asparagus = 
-	{
-		test = function(brewer, names, tags) return names.asparagus and (names.asparagus == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 62.5,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"asparagus", 2}, {"kyno_spotspice", 1}}},
-	},
-	
+
 	pickles_onion = 
 	{
 		test = function(brewer, names, tags) return names.onion and (names.onion == 2) and tags.spotspice end,
@@ -424,7 +578,26 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"onion", 2}, {"kyno_spotspice", 1}}},
 	},
-	
+
+	pickles_pepper = 
+	{
+		test = function(brewer, names, tags) return names.pepper and (names.pepper == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		temperature = TUNING.HOT_FOOD_BONUS_TEMP,
+		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
+		health = 25,
+		hunger = 25,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"pepper", 2}, {"kyno_spotspice", 1}}},
+	},
+
 	pickles_tomato = 
 	{
 		test = function(brewer, names, tags) return names.tomato and (names.tomato == 2) and tags.spotspice end,
@@ -458,16 +631,31 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"potato", 2}, {"kyno_spotspice", 1}}},
 	},
-	
-	pickles_pepper = 
+
+	pickles_asparagus = 
 	{
-		test = function(brewer, names, tags) return names.pepper and (names.pepper == 2) and tags.spotspice end,
+		test = function(brewer, names, tags) return names.asparagus and (names.asparagus == 2) and tags.spotspice end,
 		priority = 30,
 		foodtype = FOODTYPE.VEGGIE,
 		perishtime = TUNING.PERISH_MED,
-		temperature = TUNING.HOT_FOOD_BONUS_TEMP,
-		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
-		health = 25,
+		health = 20,
+		hunger = 62.5,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"asparagus", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_aloe = 
+	{
+		test = function(brewer, names, tags) return names.kyno_aloe and (names.kyno_aloe == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
 		hunger = 25,
 		sanity = 10,
 		cooktime = 72,
@@ -475,7 +663,246 @@ local kyno_foods_jar =
 		nameoverride = "KYNO_PICKLES",
 		overridebuild = "kyno_foodrecipes_jar",
 		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"pepper", 2}, {"kyno_spotspice", 1}}},
+		card_def = {ingredients = {{"kyno_aloe", 2}, {"kyno_spotspice", 1}}},
+	},
+	
+	pickles_radish = 
+	{
+		test = function(brewer, names, tags) return names.kyno_radish and (names.kyno_radish == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
+		hunger = 62.5,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_radish", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_fennel = 
+	{
+		test = function(brewer, names, tags) return names.kyno_fennel and (names.kyno_fennel == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 30,
+		hunger = 40,
+		sanity = -15,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_fennel", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_sweetpotato = 
+	{
+		test = function(brewer, names, tags) return names.kyno_sweetpotato and (names.kyno_sweetpotato == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 25,
+		hunger = 62.5,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_sweetpotato", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_parznip = 
+	{
+		test = function(brewer, names, tags) return (names.kyno_parznip or 
+		(names.kyno_parznip_eaten and names.kyno_parznip_eaten == 2)) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
+		hunger = 75,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_parznip", 2}, {"kyno_spotspice", 1}}},
+	},
+	
+	pickles_turnip = 
+	{
+		test = function(brewer, names, tags) return names.kyno_turnip and (names.kyno_turnip == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 40,
+		hunger = 32.5,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_turnip", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_rice =
+	{
+		test = function(brewer, names, tags) return names.kyno_rice and (names.kyno_rice == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
+		hunger = 62.5,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_rice", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_kelp = 
+	{
+		test = function(brewer, names, tags) return names.kelp and (names.kelp == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 25,
+		hunger = 20,
+		sanity = -5,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kelp", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_seaweeds = 
+	{
+		test = function(brewer, names, tags) return names.kyno_seaweeds and (names.kyno_seaweeds == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
+		hunger = 62.5,
+		sanity = -10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_seaweeds", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_avocado = 
+	{
+		test = function(brewer, names, tags) return names.rock_avocado_fruit_ripe and (names.rock_avocado_fruit_ripe == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
+		hunger = 35,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"rock_avocado_fruit_ripe", 2}, {"kyno_spotspice", 1}}},
+	},
+	
+	pickles_lichen = 
+	{
+		test = function(brewer, names, tags) return names.cutlichen and (names.cutlichen == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 30,
+		hunger = 15,
+		sanity = -15,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"cutlichen", 2}, {"kyno_spotspice", 1}}},
+	},
+
+	pickles_lotus = 
+	{
+		test = function(brewer, names, tags) return names.kyno_lotus_flower and (names.kyno_lotus_flower == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 33,
+		hunger = 33,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_lotus_flower", 2}, {"kyno_spotspice", 1}}},
+	},
+	
+	pickles_taroroot = 
+	{
+		test = function(brewer, names, tags) return names.kyno_taroroot and (names.kyno_taroroot == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 40,
+		hunger = 20,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_taroroot", 2}, {"kyno_spotspice", 1}}},
+	},
+	
+	pickles_waterycress = 
+	{
+		test = function(brewer, names, tags) return names.kyno_waterycress and (names.kyno_waterycress == 2) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 20,
+		hunger = 40,
+		sanity = 10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_waterycress", 2}, {"kyno_spotspice", 1}}},
+	},
+	
+	pickles_cactus = 
+	{
+		test = function(brewer, names, tags) return (names.cactus_meat or (names.cactus_flower and names.cactus_flower == 2)) and tags.spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_MED,
+		health = 50,
+		hunger = 25,
+		sanity = -10,
+		cooktime = 72,
+		scale = .90,
+		nameoverride = "KYNO_PICKLES",
+		overridebuild = "kyno_foodrecipes_jar",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"cactus_meat", 2}, {"kyno_spotspice", 1}}},
 	},
 	
 	pickles_redcap = 
@@ -557,40 +984,6 @@ local kyno_foods_jar =
         end,
 	},
 	
-	pickles_kelp = 
-	{
-		test = function(brewer, names, tags) return names.kelp and (names.kelp == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 25,
-		hunger = 20,
-		sanity = -5,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kelp", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_avocado = 
-	{
-		test = function(brewer, names, tags) return names.rock_avocado_fruit_ripe and (names.rock_avocado_fruit_ripe == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 35,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"rock_avocado_fruit_ripe", 2}, {"kyno_spotspice", 1}}},
-	},
-	
 	pickles_whitecap = 
 	{
 		test = function(brewer, names, tags) return names.kyno_white_cap and (names.kyno_white_cap == 2) and tags.spotspice end,
@@ -606,211 +999,6 @@ local kyno_foods_jar =
 		overridebuild = "kyno_foodrecipes_jar",
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"kyno_white_cap", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_aloe = 
-	{
-		test = function(brewer, names, tags) return names.kyno_aloe and (names.kyno_aloe == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 25,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_aloe", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_radish = 
-	{
-		test = function(brewer, names, tags) return names.kyno_radish and (names.kyno_radish == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 62.5,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_radish", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_sweetpotato = 
-	{
-		test = function(brewer, names, tags) return names.kyno_sweetpotato and (names.kyno_sweetpotato == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 25,
-		hunger = 62.5,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_sweetpotato", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_lotus = 
-	{
-		test = function(brewer, names, tags) return names.kyno_lotus_flower and (names.kyno_lotus_flower == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 33,
-		hunger = 33,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_lotus_flower", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_seaweeds = 
-	{
-		test = function(brewer, names, tags) return names.kyno_seaweeds and (names.kyno_seaweeds == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 62.5,
-		sanity = -10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_seaweeds", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_taroroot = 
-	{
-		test = function(brewer, names, tags) return names.kyno_taroroot and (names.kyno_taroroot == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 40,
-		hunger = 20,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_taroroot", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_waterycress = 
-	{
-		test = function(brewer, names, tags) return names.kyno_waterycress and (names.kyno_waterycress == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 40,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_waterycress", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_cucumber = 
-	{
-		test = function(brewer, names, tags) return names.kyno_cucumber and (names.kyno_cucumber == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 62.5,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_cucumber", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_parznip = 
-	{
-		test = function(brewer, names, tags) return (names.kyno_parznip or 
-		(names.kyno_parznip_eaten and names.kyno_parznip_eaten == 2)) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 75,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_parznip", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_turnip = 
-	{
-		test = function(brewer, names, tags) return names.kyno_turnip and (names.kyno_turnip == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 40,
-		hunger = 32.5,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_turnip", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_fennel = 
-	{
-		test = function(brewer, names, tags) return names.kyno_fennel and (names.kyno_fennel == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 30,
-		hunger = 40,
-		sanity = -15,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_fennel", 2}, {"kyno_spotspice", 1}}},
-	},
-	
-	pickles_rice =
-	{
-		test = function(brewer, names, tags) return names.kyno_rice and (names.kyno_rice == 2) and tags.spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 62.5,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_PICKLES",
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_rice", 2}, {"kyno_spotspice", 1}}},
 	},
 	
 	pickles_truffles =
@@ -888,179 +1076,6 @@ local kyno_foods_jar =
 
 			eater:AddDebuff("kyno_acidimmunityaltbuff", "kyno_acidimmunityaltbuff")
 		end,
-	},
-	
-	mayonnaise = 
-	{
-		test = function(brewer, names, tags) return tags.egg and tags.oil and names.kyno_salt
-		and not tags.chickenegg and not names.tallbirdegg and not names.nightmarefuel end,
-		priority = 30,
-		foodtype = FOODTYPE.GOODIES,
-		perishtime = TUNING.PERISH_SLOW,
-		health = 10,
-		hunger = 12.5,
-		sanity = 15,
-		cooktime = 24,
-		scale = .90,
-		nameoverride = "KYNO_MAYONNAISE",
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"bird_egg", 1}, {"kyno_oil", 1}, {"kyno_salt", 1}}},
-		prefabs = { "kyno_hungerregenbuff" },
-        oneatenfn = function(inst, eater)
-            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
-        end,
-	},
-	
-	mayonnaise_chicken = 
-	{
-		test = function(brewer, names, tags) return tags.chickenegg and tags.oil and names.kyno_salt and not names.nightmarefuel end,
-		priority = 30,
-		foodtype = FOODTYPE.GOODIES,
-		perishtime = TUNING.PERISH_SLOW,
-		health = 0,
-		hunger = 25,
-		sanity = 25,
-		cooktime = 24,
-		scale = .90,
-		nameoverride = "KYNO_MAYONNAISE",
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_chicken_egg", 1}, {"kyno_oil", 1}, {"kyno_salt", 1}}},
-		prefabs = { "kyno_hungerregenbuff" },
-        oneatenfn = function(inst, eater)
-            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
-        end,
-	},
-	
-	mayonnaise_tallbird = 
-	{
-		test = function(brewer, names, tags) return names.tallbirdegg and tags.oil and names.kyno_salt and not names.nightmarefuel end,
-		priority = 30,
-		foodtype = FOODTYPE.GOODIES,
-		perishtime = TUNING.PERISH_SLOW,
-		health = 30,
-		hunger = 12.5,
-		sanity = 5,
-		cooktime = 24,
-		scale = .90,
-		nameoverride = "KYNO_MAYONNAISE",
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"tallbirdegg", 1}, {"kyno_oil", 1}, {"kyno_salt", 1}}},
-		prefabs = { "kyno_hungerregenbuff" },
-        oneatenfn = function(inst, eater)
-            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
-        end,
-	},
-	
-	mayonnaise_nightmare =
-	{
-		test = function(brewer, names, tags) return tags.egg and names.nightmarefuel and names.kyno_salt end,
-		priority = 35,
-		foodtype = FOODTYPE.GOODIES,
-		perishtime = TUNING.PERISH_SUPERSLOW,
-		health = 30,
-		hunger = 62.5,
-		sanity = -5,
-		cooktime = 72,
-		scale = .90,
-		nameoverride = "KYNO_MAYONNAISE",
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_DESANITY,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"bird_egg", 1}, {"nightmarefuel", 1}, {"kyno_salt", 1}}},
-		prefabs = { "kyno_insanitybuff" },
-        oneatenfn = function(inst, eater)
-            eater:AddDebuff("kyno_insanitybuff", "kyno_insanitybuff")
-        end,
-	},
-	
-	tartarsauce = 
-	{
-		test = function(brewer, names, tags) return tags.mayonnaise and tags.spotspice and names.kyno_cucumber and not names.mayonnaise_nightmare end,
-		priority = 30,
-		foodtype = FOODTYPE.GOODIES,
-		perishtime = TUNING.PERISH_MED,
-		health = 20,
-		hunger = 62.5,
-		sanity = 10,
-		cooktime = 72,
-		scale = .90,
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_REHUNGER,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		luckitem = { luck = -TUNING.KYNO_LUCK_MED },
-		card_def = {ingredients = {{"mayonnaise", 1}, {"kyno_spotspice", 1}, {"kyno_cucumber", 1}}},
-		oneatenfn = function(inst, eater)
-            eater:AddDebuff("kyno_hungerregenbuff", "kyno_hungerregenbuff")
-        end,
-	},
-	
-	butter_beefalo =
-	{
-		test = function(brewer, names, tags) return names.kyno_milk_beefalo and (names.kyno_milk_beefalo == 2) and names.kyno_salt end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_SLOW,
-		health = 0,
-		hunger = 25,
-		sanity = 40,
-		cooktime = 96,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_milk_beefalo", 2}, {"kyno_salt", 1}}},
-	},
-	
-	butter_goat =
-	{
-		test = function(brewer, names, tags) return names.goatmilk and (names.goatmilk == 2) and names.kyno_salt end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_SLOW,
-		health = 25,
-		hunger = 40,
-		sanity = 0,
-		cooktime = 96,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"goatmilk", 2}, {"kyno_salt", 1}}},
-	},
-	
-	butter_koalefant =
-	{
-		test = function(brewer, names, tags) return names.kyno_milk_koalefant and (names.kyno_milk_koalefant == 2) and names.kyno_salt end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_SLOW,
-		health = 20,
-		hunger = 25,
-		sanity = 20,
-		cooktime = 96,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_milk_koalefant", 2}, {"kyno_salt", 1}}},
-	},
-	
-	truffleoil =
-	{
-		test = function(brewer, names, tags) return names.kyno_truffles and names.seeds and names.kyno_salt end,
-		priority = 30,
-		foodtype = FOODTYPE.VEGGIE,
-		perishtime = TUNING.PERISH_SUPERSLOW,
-		health = -10,
-		hunger = 12.5,
-		sanity = -20,
-		cooktime = 24,
-		stacksize = 2,
-		goldvalue = 10,
-		overridebuild = "kyno_foodrecipes_jar",
-		floater = TUNING.HOF_FLOATER,
-		tags = {"fooddrink", "truffles"},
-		card_def = {ingredients = {{"kyno_truffles", 1}, {"seeds", 1}, {"kyno_salt", 1}}},
 	},
 	
 	agedroe_pondfish =
@@ -1142,193 +1157,7 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"kyno_roe_wobster_monkeyisland", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
 	},
-	
-	agedroe_neonfish =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_neonfish and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 25,
-		hunger = 20,
-		sanity = 10,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_neonfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_pierrotfish =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_pierrotfish and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 15,
-		hunger = 15,
-		sanity = 10,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_pierrotfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_grouper =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_grouper and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 10,
-		hunger = 20,
-		sanity = 25,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_grouper", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_tropicalfish =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_tropicalfish and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 10,
-		hunger = 15,
-		sanity = 15,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_tropicalfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_jellyfish =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_jellyfish and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 15,
-		hunger = 15,
-		sanity = 0,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_jellyfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_jellyfish_rainbow =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_jellyfish_rainbow and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 15,
-		hunger = 15,
-		sanity = 15,
-		cooktime = 48,
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_GLOW,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		prefabs = { "kyno_jellyfish_rainbow_light_greater" },
-		card_def = {ingredients = {{"kyno_roe_jellyfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-		oneatenfn = function(inst, eater)
-            if eater.wormlight ~= nil then
-                if eater.wormlight.prefab == "kyno_jellyfish_rainbow_light_greater" then
-                    eater.wormlight.components.spell.lifetime = 0
-                    eater.wormlight.components.spell:ResumeSpell()
-                    return
-                else
-                    eater.wormlight.components.spell:OnFinish()
-                end
-            end
 
-            local light = SpawnPrefab("kyno_jellyfish_rainbow_light_greater")
-            light.components.spell:SetTarget(eater)
-			
-            if light:IsValid() then
-                if light.components.spell.target == nil then
-                    light:Remove()
-                else
-                    light.components.spell:StartSpell()
-                end
-            end
-        end,
-	},
-	
-	agedroe_salmonfish =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_salmonfish and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 10,
-		hunger = 15,
-		sanity = 15,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_salmonfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_koi =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_koi and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 15,
-		hunger = 20,
-		sanity = 25,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_koi", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_antchovy =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_antchovy and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		health = 5,
-		hunger = 10,
-		sanity = 5,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_antchovy", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
-	agedroe_swordfish_blue =
-	{
-		test = function(brewer, names, tags) return names.kyno_roe_swordfish_blue and names.kyno_salt and names.kyno_spotspice end,
-		priority = 30,
-		foodtype = FOODTYPE.MEAT,
-		perishtime = TUNING.PERISH_PRESERVED,
-		temperature = TUNING.COLD_FOOD_BONUS_TEMP,
-		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
-		health = 20,
-		hunger = 25,
-		sanity = 25,
-		cooktime = 48,
-		nameoverride = "AGEDROE",
-		overridebuild = "kyno_foodrecipes_jar1",
-		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_swordfish_blue", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-	},
-	
 	agedroe_oceanfish_small_1 =
 	{
 		test = function(brewer, names, tags) return names.kyno_roe_oceanfish_small_1 and names.kyno_salt and names.kyno_spotspice end,
@@ -1474,7 +1303,33 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"kyno_roe_oceanfish_small_9", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
 	},
-	
+
+	agedroe_oceanfish_pufferfish =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_oceanfish_pufferfish and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 15,
+		hunger = 25,
+		sanity = 20,
+		cooktime = 48,
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_PUFFERFISH,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_oceanfish_pufferfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+		oneatenfn = function(inst, eater)
+			if eater ~= nil and not (eater.components.health ~= nil and eater.components.health:IsDead()) and
+			not eater:HasTag("playerghost") then
+				if TryLuckRoll(eater, TUNING.KYNO_PUFFERFISH_KILL_CHANCE, HofLuckFormulas.PufferfishPoison) then
+					eater.components.health:SetInvincible(false)
+					eater.components.health:Kill()
+				end
+            end
+		end,
+	},
+
 	agedroe_oceanfish_medium_1 =
 	{
 		test = function(brewer, names, tags) return names.kyno_roe_oceanfish_medium_1 and names.kyno_salt and names.kyno_spotspice end,
@@ -1620,66 +1475,212 @@ local kyno_foods_jar =
 		floater = TUNING.HOF_FLOATER,
 		card_def = {ingredients = {{"kyno_roe_oceanfish_medium_9", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
 	},
-	
-	agedroe_oceanfish_pufferfish =
+
+	agedroe_oceanfish_midnight_carp =
 	{
-		test = function(brewer, names, tags) return names.kyno_roe_oceanfish_pufferfish and names.kyno_salt and names.kyno_spotspice end,
+		test = function(brewer, names, tags) return names.kyno_roe_oceanfish_midnight_carp and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 33,
+		hunger = 25,
+		sanity = 10,
+		cooktime = 48,
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_DARKNESS,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_oceanfish_midnight_carp", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+		prefabs = { "kyno_darknessbuff" },
+		oneatenfn = function(inst, eater)
+			eater:AddDebuff("kyno_darknessbuff", "kyno_darknessbuff")
+		end,
+	},
+
+	agedroe_tropicalfish =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_tropicalfish and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 10,
+		hunger = 15,
+		sanity = 15,
+		cooktime = 48,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_tropicalfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+	},
+	
+	agedroe_pierrotfish =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_pierrotfish and names.kyno_salt and names.kyno_spotspice end,
 		priority = 30,
 		foodtype = FOODTYPE.MEAT,
 		perishtime = TUNING.PERISH_PRESERVED,
 		health = 15,
-		hunger = 25,
-		sanity = 20,
+		hunger = 15,
+		sanity = 10,
 		cooktime = 48,
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_PUFFERFISH,
 		nameoverride = "AGEDROE",
 		overridebuild = "kyno_foodrecipes_jar1",
 		floater = TUNING.HOF_FLOATER,
-		card_def = {ingredients = {{"kyno_roe_oceanfish_pufferfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
-		oneatenfn = function(inst, eater)
-			if eater ~= nil and not (eater.components.health ~= nil and eater.components.health:IsDead()) and
-			not eater:HasTag("playerghost") then
-				if TryLuckRoll(eater, TUNING.KYNO_PUFFERFISH_KILL_CHANCE, HofLuckFormulas.PufferfishPoison) then -- Chance to die eating this, haha.
-					eater.components.health:SetInvincible(false)
-					eater.components.health:Kill()
-				end
-            end
-		end,
+		card_def = {ingredients = {{"kyno_roe_pierrotfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
 	},
-	
-	agedroe_oceanfish_sturgeon =
+
+	agedroe_neonfish =
 	{
-		test = function(brewer, names, tags) return names.kyno_roe_oceanfish_sturgeon and names.kyno_salt and names.kyno_spotspice end,
+		test = function(brewer, names, tags) return names.kyno_roe_neonfish and names.kyno_salt and names.kyno_spotspice end,
 		priority = 30,
 		foodtype = FOODTYPE.MEAT,
 		perishtime = TUNING.PERISH_PRESERVED,
-		health = 20,
-		hunger = 37.5,
-		sanity = 33,
+		health = 25,
+		hunger = 20,
+		sanity = 10,
 		cooktime = 48,
-		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_EXQUISITE,
+		nameoverride = "AGEDROE",
 		overridebuild = "kyno_foodrecipes_jar1",
 		floater = TUNING.HOF_FLOATER,
-		tags = {"exquisite"},
-		card_def = {ingredients = {{"kyno_roe_oceanfish_sturgeon", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+		card_def = {ingredients = {{"kyno_roe_neonfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
 	},
 	
-	-- This recipe is for when brewing an invalid product, we need this to prevent a crash.
-	wetgoop2 =
+	agedroe_grouper =
 	{
-		test = function(brewer, names, tags) return true end,
-		priority = -2,
-		perishtime = nil,
-		health = 0,
-		hunger = 0,
+		test = function(brewer, names, tags) return names.kyno_roe_grouper and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 10,
+		hunger = 20,
+		sanity = 25,
+		cooktime = 48,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_grouper", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+	},
+
+	agedroe_koi =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_koi and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 15,
+		hunger = 20,
+		sanity = 25,
+		cooktime = 48,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_koi", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+	},
+	
+	agedroe_salmonfish =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_salmonfish and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 10,
+		hunger = 15,
+		sanity = 15,
+		cooktime = 48,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_salmonfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+	},
+	
+	agedroe_jellyfish =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_jellyfish and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 15,
+		hunger = 15,
 		sanity = 0,
-		cooktime = 1,
-		bank = "wetgoop2",
-		anim = "idle",
-		isfertilizer = true,
-		nutrients = {32, 8, 8},
-		-- no_brewbook = true,
-        floater = {"small", nil, nil},
+		cooktime = 48,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_jellyfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+	},
+	
+	agedroe_jellyfish_rainbow =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_jellyfish_rainbow and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 15,
+		hunger = 15,
+		sanity = 15,
+		cooktime = 48,
+		oneat_desc = STRINGS.UI.COOKBOOK.FOOD_EFFECTS_GLOW,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		prefabs = { "kyno_jellyfish_rainbow_light_greater" },
+		card_def = {ingredients = {{"kyno_roe_jellyfish", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+		oneatenfn = function(inst, eater)
+            if eater.wormlight ~= nil then
+                if eater.wormlight.prefab == "kyno_jellyfish_rainbow_light_greater" then
+                    eater.wormlight.components.spell.lifetime = 0
+                    eater.wormlight.components.spell:ResumeSpell()
+                    return
+                else
+                    eater.wormlight.components.spell:OnFinish()
+                end
+            end
+
+            local light = SpawnPrefab("kyno_jellyfish_rainbow_light_greater")
+            light.components.spell:SetTarget(eater)
+			
+            if light:IsValid() then
+                if light.components.spell.target == nil then
+                    light:Remove()
+                else
+                    light.components.spell:StartSpell()
+                end
+            end
+        end,
+	},
+	
+	agedroe_antchovy =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_antchovy and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		health = 5,
+		hunger = 10,
+		sanity = 5,
+		cooktime = 48,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_antchovy", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
+	},
+	
+	agedroe_swordfish_blue =
+	{
+		test = function(brewer, names, tags) return names.kyno_roe_swordfish_blue and names.kyno_salt and names.kyno_spotspice end,
+		priority = 30,
+		foodtype = FOODTYPE.MEAT,
+		perishtime = TUNING.PERISH_PRESERVED,
+		temperature = TUNING.COLD_FOOD_BONUS_TEMP,
+		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
+		health = 20,
+		hunger = 25,
+		sanity = 25,
+		cooktime = 48,
+		nameoverride = "AGEDROE",
+		overridebuild = "kyno_foodrecipes_jar1",
+		floater = TUNING.HOF_FLOATER,
+		card_def = {ingredients = {{"kyno_roe_swordfish_blue", 1}, {"kyno_salt", 1}, {"kyno_spotspice", 1}}},
 	},
 }
 

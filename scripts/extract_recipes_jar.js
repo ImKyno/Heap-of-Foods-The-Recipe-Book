@@ -31,7 +31,7 @@ const BLOCKED_RECIPES = new Set([
 ])
 
 const IGNORE_DEBUFF_RECIPES = new Set([
-  
+  "jelly_durian",
 ])
 
 function extractNumber(block, key) {
