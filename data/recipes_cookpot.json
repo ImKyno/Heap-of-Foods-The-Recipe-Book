@@ -154,6 +154,13 @@
         ],
         "amount": 1,
         "comparator": "equal"
+      },
+      {
+        "items": [
+          "twigs"
+        ],
+        "amount": 1,
+        "comparator": "equal"
       }
     ]
   },

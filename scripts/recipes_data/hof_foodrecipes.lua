@@ -97,7 +97,7 @@ local kyno_foods =
 		{
 			{ items = { "jellyfish" }, amount = 1 },
 			{ items = { "ice" }, amount = 1 },
-			{ items = { "twigs" }, amount 1 },
+			{ items = { "twigs" }, amount = 1 },
 		},
 	},
 	
