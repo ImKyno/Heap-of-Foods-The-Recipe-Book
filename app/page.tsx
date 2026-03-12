@@ -35,14 +35,14 @@ export default function HomePage() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const selectItem = (item: any) => {
-  setSearch("");
-  setSearchOpen(false);
-  setHighlightIndex(0);
+    setSearch("");
+    setSearchOpen(false);
+    setHighlightIndex(0);
 
-  const currentPath = window.location.pathname;
+    const currentPath = window.location.pathname;
 
-  if (item.type === "ingredients") {
-    const query = item.name;
+    if (item.type === "ingredients") {
+      const query = item.name;
 
       if (currentPath !== "/ingredients") {
         window.location.href = `/ingredients?ingredient=${query}`;
@@ -160,7 +160,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-300 dark:bg-zinc-950 text-zinc-900 dark:text-white flex justify-center relative">
+    <div className="min-h-screen bg-zinc-300 dark:bg-zinc-800 text-zinc-900 dark:text-white flex justify-center relative">
       {/* SETTINGS BUTTON */}
       <div className="fixed top-4 right-4 z-50">
         <Link href="/settings">
@@ -177,104 +177,110 @@ export default function HomePage() {
           <div className="flex items-center gap-4">
             <img
               src="/icons/misc/icon_hof.png"
-              className="w-[120px] h-[120px] drop-shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+              className="w-[120px] h-[120px] drop-shadow-lg"
             />
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center drop-shadow-md">
               <h1 className="text-3xl font-bold">{t("main.title")}</h1>
-              <p className="text-lg text-zinc-700 dark:text-zinc-400">{t("main.subtitle")}</p>
+              <p className="text-lg text-zinc-700 dark:text-zinc-400">
+                {t("main.subtitle")}
+              </p>
             </div>
           </div>
         </div>
         {/* SEARCH */}
         <div className="w-full max-w-150 mb-4 flex gap-3">
-  {/* INPUT */}
-  <div className="relative flex-1">
-    <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-zinc-500 dark:text-white">
-      <FontAwesomeIcon icon={faMagnifyingGlass} />
-    </div>
-    <input
-      ref={inputRef}
-      type="text"
-      placeholder={t("search.title.everything")}
-      value={search}
-      onChange={(e) => {
-        setSearch(e.target.value);
-        setSearchOpen(true);
-        setHighlightIndex(0);
-      }}
-      onFocus={() => setSearchOpen(true)}
-      onKeyDown={(e) => {
-        if (!searchedItems.length) return;
-        if (e.key === "ArrowDown") {
-          e.preventDefault();
-          setHighlightIndex((prev) =>
-            prev < searchedItems.length - 1 ? prev + 1 : 0,
-          );
-        }
-        if (e.key === "ArrowUp") {
-          e.preventDefault();
-          setHighlightIndex((prev) =>
-            prev > 0 ? prev - 1 : searchedItems.length - 1,
-          );
-        }
-        if (e.key === "Enter") {
-          e.preventDefault();
-          selectItem(searchedItems[highlightIndex]);
-        }
-        if (e.key === "Escape") {
-          setSearch("");
-          setSearchOpen(false);
-          setHighlightIndex(0);
-          inputRef.current?.blur();
-          return;
-        }
-      }}
-      className="w-full bg-white dark:bg-zinc-900 rounded-xl px-10 py-3 text-lg italic shadow focus:outline-none"
-    />
-    {searchOpen && search && (
-      <div
-        ref={dropdownRef}
-        className="absolute top-full mt-2 w-full bg-white dark:bg-zinc-900 rounded-xl shadow-xl overflow-hidden z-50"
-      >
-        <div className="max-h-100 overflow-y-auto overscroll-contain">
-          {searchedItems.length === 0 && (
-            <div className="px-4 py-3 text-sm text-zinc-500 dark:text-white italic">
-              {t("search.notfound.everything")}
+          {/* INPUT */}
+          <div className="relative flex-1">
+            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-zinc-500 dark:text-white">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
             </div>
-          )}
-          {searchedItems.map((item, idx) => (
-            <div
-              key={`${item.name}-${item.variant || "none"}`}
-              onClick={() => selectItem(item)}
-              className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition ${
-                highlightIndex === idx
-                  ? "bg-zinc-100 dark:bg-zinc-800"
-                  : "hover:bg-zinc-100 dark:hover:bg-zinc-800"
-              }`}
-            >
-              <img
-                src={
-                  item.type === "ingredients"
-                    ? `/icons/ingredients/ingredient_${item.name}${
-                        item.variant === "normal" ? "" : `_${item.variant}`
-                      }.png`
-                    : item.type === "recipes_seasonal"
-                    ? `/foods_cookpot_seasonal/${item.name}.png`
-                    : `${item.icon}/${item.name}.png`
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder={t("search.title.everything")}
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setSearchOpen(true);
+                setHighlightIndex(0);
+              }}
+              onFocus={() => setSearchOpen(true)}
+              onKeyDown={(e) => {
+                if (!searchedItems.length) return;
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setHighlightIndex((prev) =>
+                    prev < searchedItems.length - 1 ? prev + 1 : 0,
+                  );
                 }
-                className="w-10 h-10 object-contain"
-              />
-              <span className="text-sm font-semibold">{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    )}
-  </div>
+                if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setHighlightIndex((prev) =>
+                    prev > 0 ? prev - 1 : searchedItems.length - 1,
+                  );
+                }
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  selectItem(searchedItems[highlightIndex]);
+                }
+                if (e.key === "Escape") {
+                  setSearch("");
+                  setSearchOpen(false);
+                  setHighlightIndex(0);
+                  inputRef.current?.blur();
+                  return;
+                }
+              }}
+              className="w-full bg-white dark:bg-zinc-900 rounded-xl px-10 py-3 text-lg italic shadow focus:outline-none"
+            />
+            {searchOpen && search && (
+              <div
+                ref={dropdownRef}
+                className="absolute top-full mt-2 w-full bg-white dark:bg-zinc-900 rounded-xl shadow-xl overflow-hidden z-50"
+              >
+                <div className="max-h-100 overflow-y-auto overscroll-contain">
+                  {searchedItems.length === 0 && (
+                    <div className="px-4 py-3 text-sm text-zinc-500 dark:text-white italic">
+                      {t("search.notfound.everything")}
+                    </div>
+                  )}
+                  {searchedItems.map((item, idx) => (
+                    <div
+                      key={`${item.name}-${item.variant || "none"}`}
+                      onClick={() => selectItem(item)}
+                      className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition ${
+                        highlightIndex === idx
+                          ? "bg-zinc-100 dark:bg-zinc-700"
+                          : "hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                      }`}
+                    >
+                      <img
+                        src={
+                          item.type === "ingredients"
+                            ? `/icons/ingredients/ingredient_${item.name}${
+                                item.variant === "normal"
+                                  ? ""
+                                  : `_${item.variant}`
+                              }.png`
+                            : item.type === "recipes_seasonal"
+                              ? `/foods_cookpot_seasonal/${item.name}.png`
+                              : `${item.icon}/${item.name}.png`
+                        }
+                        className="w-10 h-10 object-contain"
+                      />
+                      <span className="text-sm font-semibold">
+                        {item.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
-  {/* RANDOM RECIPE BUTTON */}
-  <RandomRecipe onSelectItem={selectItem} interval={500} />
-</div>
+          {/* RANDOM RECIPE BUTTON */}
+          <RandomRecipe onSelectItem={selectItem} interval={500} />
+        </div>
 
         {/* SEARCH CATEGORY TEXT */}
         <div className="mb-6 text-center w-full">

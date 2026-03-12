@@ -17,6 +17,29 @@ const pt = {
     ingredients: "Ingredientes",
   },
 
+  search: {
+    title: {
+      everything: "Pesquisar receita ou ingrediente...",
+      recipe: "Pesquisar receita...",
+      ingredient: "Pesquisar ingrediente...",
+    },
+    notfound: {
+      everything: "Nenhuma receita ou ingrediente com este nome foi encontrado.",
+      recipe: "Nenhuma receita com este nome foi encontrada.",
+      ingredient: "Nenhum ingrediente com este nome foi encontrado.",
+    },
+  },
+
+  settings: {
+    title: "Configurações",
+    theme: {
+      dark: "Tema Escuro",
+      light: "Tema Claro",
+    },
+    lang: "Idioma",
+    backtopage: "Voltar para Página Anterior",
+  },
+
   pages: {
     home: {
       title: "Inicio",
@@ -42,28 +65,6 @@ const pt = {
     settings: {
       title: "Configurações",
     },
-  },
-
-  search: {
-    title: {
-      everything: "Pesquisar receita ou ingrediente...",
-      recipe: "Pesquisar receita...",
-      ingredient: "Pesquisar ingrediente...",
-    },
-    notfound: {
-      everything: "Nenhuma receita ou ingrediente com este nome foi encontrado.",
-      recipe: "Nenhuma receita com este nome foi encontrada.",
-      ingredient: "Nenhum ingrediente com este nome foi encontrado.",
-    },
-  },
-
-  settings: {
-    title: "Configurações",
-    theme: {
-      dark: "Tema Escuro",
-      light: "Tema Claro",
-    },
-    lang: "Idioma",
   },
 
   footer: {

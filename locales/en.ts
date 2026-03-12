@@ -17,6 +17,29 @@ const en = {
     ingredients: "Ingredients",
   },
 
+  settings: {
+    title: "Settings",
+    theme: {
+      dark: "Dark Theme",
+      light: "Light Theme",
+    },
+    lang: "Language",
+    backtopage: "Back to Previous Page",
+  },
+
+  footer: {
+    backtotop: "Back to Top",
+    mainpage: "Main Page",
+    discord: "Join our Discord",
+    download: "Download the Mod",
+    workshop: "Workshop Page",
+    kofi: "Support Me!",
+    description: `Heap of Foods is a mod for Don't Starve Together made by Kyno.
+    It is not affiliated with Klei Entertainment.
+
+    A special thanks to everyone who made this mod possible!`
+  },
+
   pages: {
     home: {
       title: "Home",
@@ -55,28 +78,6 @@ const en = {
       recipe: "No recipe found with that name.",
       ingredient: "No ingredient found with that name.",
     },
-  },
-
-  settings: {
-    title: "Settings",
-    theme: {
-      dark: "Dark Theme",
-      light: "Light Theme",
-    },
-    lang: "Language",
-  },
-
-  footer: {
-    backtotop: "Back to Top",
-    mainpage: "Main Page",
-    discord: "Join our Discord",
-    download: "Download the Mod",
-    workshop: "Workshop Page",
-    kofi: "Support Me!",
-    description: `Heap of Foods is a mod for Don't Starve Together made by Kyno.
-    It is not affiliated with Klei Entertainment.
-
-    A special thanks to everyone who made this mod possible!`
   },
 
   time: {

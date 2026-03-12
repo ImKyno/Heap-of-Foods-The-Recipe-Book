@@ -457,10 +457,10 @@ export default function CookPotKeg() {
   }, [recipeParam, sortedRecipes]);
 
   return (
-    <div className="bg-zinc-300 dark:bg-zinc-950 text-zinc-900 dark:text-white min-h-screen">
-      <div className="max-w-full pt-16 pb-1"></div>
+    <div className="bg-zinc-300 dark:bg-zinc-800 text-zinc-900 dark:text-white min-h-screen">
+      <div className="max-w-full pt-14"></div>
       {/* STICKY SEARCH + FILTER + SORT + BACK TO TOP */}
-      <div className="sticky top-14 z-40 bg-zinc-300 dark:bg-zinc-950 shadow-md">
+      <div className="sticky top-14 z-40 bg-zinc-300 dark:bg-zinc-800 shadow-md">
         <div className="max-w-4xl mx-auto p-2 flex flex-row items-center justify-center gap-3">
           {/* SEARCH - Agora alinhado horizontalmente */}
           <div className="relative w-full max-w-sm">
@@ -548,7 +548,7 @@ export default function CookPotKeg() {
             <div className="relative group">
               <button
                 onClick={() => setFiltersOpen(!filtersOpen)}
-                className="bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-3 rounded-xl font-bold flex items-center gap-2 cursor-pointer"
+                className="bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-3 rounded-xl font-bold flex items-center gap-2 cursor-pointer"
               >
                 <FontAwesomeIcon icon={faFilter} />
               </button>
@@ -564,7 +564,7 @@ export default function CookPotKeg() {
             <div className="relative group">
               <button
                 onClick={() => setSortingOpen(!sortingOpen)}
-                className="bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-3 rounded-xl font-bold flex items-center gap-2 cursor-pointer"
+                className="bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-3 rounded-xl font-bold flex items-center gap-2 cursor-pointer"
               >
                 <FontAwesomeIcon icon={faArrowDownAZ} />
               </button>
@@ -583,7 +583,7 @@ export default function CookPotKeg() {
                   onClick={() =>
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }
-                  className="bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-3 rounded-xl font-bold flex items-center gap-2 cursor-pointer"
+                  className="bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-3 rounded-xl font-bold flex items-center gap-2 cursor-pointer"
                 >
                   <FontAwesomeIcon icon={faCircleChevronUp} />
                 </button>
