@@ -56,8 +56,9 @@ const pt = {
     foodtype: "Tipos de Receita",
     cooktype: "Tipos de Ingrediente",
     debuff: {
-      title: "Efeito Especiais",
-      hasdebuff: "Possui Efeito Especial",
+      title: "Miscelânea",
+      hasdebuff: "Efeito Especial",
+      characterfood: "Comida Favorita",
     },
     event: "Evento Especial",
     clear: "Limpar Todos Filtros",
@@ -84,6 +85,67 @@ const pt = {
     clear: "Resetar para Padrão",
   },
 
+  characters: {
+    wilson: "Wilson",
+    willow: "Willow",
+    wolfgang: "Wolfgang",
+    wendy: "Wendy",
+    wx78: "WX-78",
+    wickerbottom: "Wickerbottom",
+    woodie: "Woodie",
+    waxwell: "Maxwell",
+    wes: "Wes",
+    wathgrithr: "Wigfrid",
+    webber: "Webber",
+    winona: "Winona",
+    wortox: "Wortox",
+    wormwood: "Wormwood",
+    warly: "Warly",
+    wurt: "Wurt",
+    walter: "Walter",
+    wanda: "Wanda",
+    wonkey: "Wonkey",
+  },
+
+  card: {
+    alternative: "ou",
+    ingredients: {
+      required: "Requisitos",
+      excluded: "Restrições",
+      no_excluded: "Nenhuma Restrição",
+      example: "Exemplo",
+      info: {
+        state_title: "Estado dos Ingredientes",
+        state_p1: "Os ingredientes usados nas receitas podem estar crus ou cozidos.",
+        state_p2: "Se uma receita não especifica o estado do ingrediente, significa que tanto a versão crua quanto a cozida são válidas e podem ser usadas indistintamente.",
+        state_p3: "No entanto, se a receita exigir explicitamente a versão cozida, então a versão crua não contará para cumprir o requisito da receita.",
+
+        excluded_title: "Limites de Ingredientes Excluídos",
+        excluded_p1: "Algumas receitas podem listar ingredientes excluídos com limites de valor.",
+        excluded_p2: "1.0+ significa que o ingrediente não pode ser usado mais de uma vez. Se o valor total for maior que isso, a receita irá falhar.",
+        excluded_p3: "<1.0 significa que o ingrediente deve ser usado em uma quantidade menor que um valor completo. Por exemplo, valores como 0.50 ou 0.25 são aceitáveis, mas 1.0 ou mais não atenderá ao requisito.",
+        learn_more: "Saiba Mais",
+      },
+    },
+    values: {
+      raw: "Valores do Ingrediente Cru",
+      cooked: "Valores do Ingrediente Assado",
+      dried: "Valores do Ingrediente Seco",
+    },
+    temperature: {
+      hot: "Quente",
+      cold: "Frio",
+      none: "Nenhuma",
+    },
+    debuff: {
+      hasEffect: "Efeito Especial"
+    },
+    event: {
+      xmas: "Banquete de Inverno",
+      halloween: "Noites Assombrosas",
+    },
+  },
+
   tooltips: {
     health: "Vida",
     hunger: "Fome",
@@ -95,7 +157,8 @@ const pt = {
     temperature: "Temperatura",
     foodtype: "Tipo da Receita",
     cooktype: "Tipo do Ingrediente",
-    debuff: "Efeito Especial",
+    debuff: "Efeito Temporário",
+    characterfood: "Comida Favorita",
     event: "Evento Especial",
   },
 
@@ -189,45 +252,6 @@ const pt = {
     preserved: "20 Dias",
     superslow: "40 Dias",
     never: "Nunca",
-  },
-
-  card: {
-    alternative: "ou",
-    ingredients: {
-      required: "Requisitos",
-      excluded: "Restrições",
-      no_excluded: "Nenhuma Restrição",
-      example: "Exemplo",
-      info: {
-        state_title: "Estado dos Ingredientes",
-        state_p1: "Os ingredientes usados nas receitas podem estar crus ou cozidos.",
-        state_p2: "Se uma receita não especifica o estado do ingrediente, significa que tanto a versão crua quanto a cozida são válidas e podem ser usadas indistintamente.",
-        state_p3: "No entanto, se a receita exigir explicitamente a versão cozida, então a versão crua não contará para cumprir o requisito da receita.",
-
-        excluded_title: "Limites de Ingredientes Excluídos",
-        excluded_p1: "Algumas receitas podem listar ingredientes excluídos com limites de valor.",
-        excluded_p2: "1.0+ significa que o ingrediente não pode ser usado mais de uma vez. Se o valor total for maior que isso, a receita irá falhar.",
-        excluded_p3: "<1.0 significa que o ingrediente deve ser usado em uma quantidade menor que um valor completo. Por exemplo, valores como 0.50 ou 0.25 são aceitáveis, mas 1.0 ou mais não atenderá ao requisito.",
-        learn_more: "Saiba Mais",
-      },
-    },
-    values: {
-      raw: "Valores do Ingrediente Cru",
-      cooked: "Valores do Ingrediente Assado",
-      dried: "Valores do Ingrediente Seco",
-    },
-    temperature: {
-      hot: "Quente",
-      cold: "Frio",
-      none: "Nenhuma",
-    },
-    debuff: {
-      hasEffect: "Efeito Especial"
-    },
-    event: {
-      xmas: "Banquete de Inverno",
-      halloween: "Noites Assombrosas",
-    },
   },
 
   recipes: {

@@ -197,6 +197,7 @@ export default function CookPotJar() {
 
   const [filterTemp, setFilterTemp] = useState<string | null>(null);
   const [filterDebuff, setFilterDebuff] = useState<boolean | null>(null);
+  const [filterCharacterFood, setFilterCharacterFood] = useState<boolean | null>(null);
   const [filterFoodType, setFilterFoodType] = useState<string[]>([]);
 
   const [search, setSearch] = useState("");
@@ -217,6 +218,9 @@ export default function CookPotJar() {
     }
     if (filterDebuff !== null) {
       if (recipe.debuff !== filterDebuff) return false;
+    }
+    if (filterCharacterFood === true) {
+      if (!recipe.characterfood) return false;
     }
     if (filterFoodType.length > 0) {
       if (!filterFoodType.includes(recipe.foodtype)) return false;
@@ -569,6 +573,13 @@ export default function CookPotJar() {
                           setFilterDebuff(filterDebuff === true ? null : true)
                         }
                       />
+                      <CheckboxFilter
+                        label={t("filters.debuff.characterfood")}
+                        checked={filterCharacterFood === true}
+                        onChange={() =>
+                          setFilterCharacterFood(filterCharacterFood === true ? null : true)
+                        }
+                      />
                     </DropdownGroup>
 
                     <div className="w-full h-1 bg-zinc-700/20 dark:bg-white/20" />
@@ -732,6 +743,18 @@ export default function CookPotJar() {
                   tooltip={t("tooltips.debuff")}
                 />
               )}
+              {recipe.characterfood &&
+                (Array.isArray(recipe.characterfood)
+                  ? recipe.characterfood
+                  : [recipe.characterfood]
+                ).map((char) => (
+                  <TopEffect
+                    key={char}
+                    icon={`/icons/characters/character_${char}.png`}
+                    value={t(`characterfood.${char}`)}
+                    tooltip={t("tooltips.characterfood")}
+                  />
+                ))}              
             </div>
           </div>
         ))}
@@ -815,7 +838,7 @@ export default function CookPotJar() {
               <div className="w-200 h-1 bg-zinc-200 dark:bg-zinc-700" />
             </div>
             {/* FOODTYPE + EFFECTS */}
-            <div className="flex justify-center items-center gap-4 mb-6 mt-2 flex-wrap font-semibold">
+            <div className="flex justify-center items-center gap-4 mb-3 mt-2 flex-wrap font-semibold">
               {selected.foodtype && <FoodType type={selected.foodtype} t={t} />}
 
               {selected.temperature != null && (
@@ -1040,17 +1063,25 @@ function Stat({ icon, value, tooltip, isStatus = false, recipe, stat }: any) {
 
   const extrasMap: Record<number, string[]> = {};
 
+  if (stat === "hunger" && recipe?.characterfood) {
+    const charValue = (recipe.hunger ?? 0) + 15;
+    extrasMap[charValue] ??= [];
+    extrasMap[charValue].push(recipe.characterfood);
+  }
+
   if (recipe?.monsterfood) {
-    const monsterValue = recipe[`monster${stat}`];
-    if (monsterValue !== undefined) {
+    const monsterValue = recipe[`monster${stat}`] ?? 0;
+
+    if (monsterValue !== 0) {
       extrasMap[monsterValue] ??= [];
       extrasMap[monsterValue].push("webber", "wortox");
     }
   }
 
   if (recipe?.mermfood) {
-    const mermValue = recipe[`merm${stat}`];
-    if (mermValue !== undefined) {
+    const mermValue = recipe[`merm${stat}`] ?? 0;
+
+    if (mermValue !== 0) {
       extrasMap[mermValue] ??= [];
       extrasMap[mermValue].push("wurt");
     }

@@ -844,7 +844,7 @@ export default function CookPotSeasonal() {
               <div className="w-200 h-1 bg-zinc-200 dark:bg-zinc-700" />
             </div>
             {/* FOODTYPE + EFFECTS */}
-            <div className="flex justify-center items-center gap-4 mb-6 mt-2 flex-wrap font-semibold">
+            <div className="flex justify-center items-center gap-4 mb-3 mt-2 flex-wrap font-semibold">
               {selected.foodtype && <FoodType type={selected.foodtype} t={t} />}
 
               {selected.temperature != null && (
@@ -1077,17 +1077,25 @@ function Stat({ icon, value, tooltip, isStatus = false, recipe, stat }: any) {
 
   const extrasMap: Record<number, string[]> = {};
 
+  if (stat === "hunger" && recipe?.characterfood) {
+    const charValue = (recipe.hunger ?? 0) + 15;
+    extrasMap[charValue] ??= [];
+    extrasMap[charValue].push(recipe.characterfood);
+  }
+
   if (recipe?.monsterfood) {
-    const monsterValue = recipe[`monster${stat}`];
-    if (monsterValue !== undefined) {
+    const monsterValue = recipe[`monster${stat}`] ?? 0;
+
+    if (monsterValue !== 0) {
       extrasMap[monsterValue] ??= [];
       extrasMap[monsterValue].push("webber", "wortox");
     }
   }
 
   if (recipe?.mermfood) {
-    const mermValue = recipe[`merm${stat}`];
-    if (mermValue !== undefined) {
+    const mermValue = recipe[`merm${stat}`] ?? 0;
+
+    if (mermValue !== 0) {
       extrasMap[mermValue] ??= [];
       extrasMap[mermValue].push("wurt");
     }

@@ -833,18 +833,24 @@ export default function CookPotWarly() {
                 value={selected.health}
                 tooltip={t("tooltips.health")}
                 isStatus
+                recipe={selected}
+                stat="health"
               />
               <Stat
                 icon="/icons/cooking/icon_hunger.png"
                 value={selected.hunger}
                 tooltip={t("tooltips.hunger")}
                 isStatus
+                recipe={selected}
+                stat="hunger"
               />
               <Stat
                 icon="/icons/cooking/icon_sanity.png"
                 value={selected.sanity}
                 tooltip={t("tooltips.sanity")}
                 isStatus
+                recipe={selected}
+                stat="sanity"
               />
             </Block>
 
@@ -997,7 +1003,7 @@ function Block({ children, showInfo = false, infoText, infoLink }: BlockProps) {
   );
 }
 
-function Stat({ icon, value, tooltip, isStatus = false }: any) {
+function Stat({ icon, value, tooltip, isStatus = false, recipe, stat }: any) {
   if (value === undefined || value === null) return null;
 
   let displayValue = value;
@@ -1020,13 +1026,67 @@ function Stat({ icon, value, tooltip, isStatus = false }: any) {
     }
   }
 
+  const extrasMap: Record<number, string[]> = {};
+
+  if (stat === "hunger" && recipe?.characterfood) {
+    const charValue = (recipe.hunger ?? 0) + 15;
+    extrasMap[charValue] ??= [];
+    extrasMap[charValue].push(recipe.characterfood);
+  }
+
+  if (recipe?.monsterfood) {
+    const monsterValue = recipe[`monster${stat}`];
+    if (monsterValue !== undefined) {
+      extrasMap[monsterValue] ??= [];
+      extrasMap[monsterValue].push("webber", "wortox");
+    }
+  }
+
+  if (recipe?.mermfood) {
+    const mermValue = recipe[`merm${stat}`];
+    if (mermValue !== undefined) {
+      extrasMap[mermValue] ??= [];
+      extrasMap[mermValue].push("wurt");
+    }
+  }
+
+  const extraValues = Object.entries(extrasMap).map(([value, chars]) => ({
+    value: Number(value),
+    characters: [...new Set(chars)],
+  }));
+
   return (
     <div className="relative group flex items-center gap-3 min-w-[120px] justify-center">
       <img src={icon} className="w-9 h-9 object-contain" />
 
-      <span className={`text-base font-semibold ${colorClass}`}>
-        {displayValue}
+      <div className="flex flex-col items-center leading-tight">
+  <span className={`text-base font-semibold ${colorClass}`}>
+    {displayValue}
+  </span>
+
+  {extraValues.map((extra, i) => (
+    <span
+      key={i}
+      className=" font-semibold flex items-center gap-1 text-zinc-600 dark:text-zinc-400"
+    >
+      (
+      <span className="text-green-500 font-semibold">
+        {extra.value > 0 ? `+${extra.value}` : extra.value}
       </span>
+
+      {extra.characters.map((char, index) => (
+        <span key={char} className="flex items-center font-bold">
+          <img
+            src={`/icons/characters/character_${char}.png`}
+            className="w-7 h-7"
+          />
+          {index < extra.characters.length - 1 && ""}
+        </span>
+      ))}
+      )
+    </span>
+  ))}
+</div>
 
       <div
         className="
