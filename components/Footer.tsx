@@ -63,7 +63,7 @@ export function Footer() {
           </p>
 
           <p className="text-sm">
-            © Copyright {new Date().getFullYear()} - All rights reserved.
+            {t("footer.copyright", { year: new Date().getFullYear() })}
           </p>
         </div>
       </div>
