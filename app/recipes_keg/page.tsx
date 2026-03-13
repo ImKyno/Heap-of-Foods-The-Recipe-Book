@@ -461,7 +461,7 @@ export default function CookPotKeg() {
       <div className="max-w-full pt-14"></div>
       {/* STICKY SEARCH + FILTER + SORT + BACK TO TOP */}
       <div className="sticky top-14 z-40 bg-zinc-300 dark:bg-zinc-800 shadow-md">
-        <div className="max-w-4xl mx-auto p-2 flex flex-row items-center justify-center gap-3">
+        <div className="max-w-4xl mx-auto p-1 sm:p-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           {/* SEARCH - Agora alinhado horizontalmente */}
           <div className="relative w-full max-w-sm">
             <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-zinc-500 dark:text-white">
@@ -599,7 +599,7 @@ export default function CookPotKeg() {
               <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 flex items-start gap-4 z-50">
                 {/* FILTER PANEL */}
                 {filtersOpen && (
-                  <div className="w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
+                  <div className="w-11/12 sm:w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
                     <DropdownGroup
                       title={t("filters.temperature")}
                       icon="/icons/cooking/icon_temperature.png"
@@ -690,7 +690,7 @@ export default function CookPotKeg() {
 
                 {/* SORT PANEL */}
                 {sortingOpen && (
-                  <div className="w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
+                  <div className="w-11/12 sm:w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
                     <DropdownGroup
                       title={t("sorting.directiontype")}
                       icon="/icons/cooking/icon_priority.png"
@@ -774,9 +774,9 @@ export default function CookPotKeg() {
         </div>
       </div>
       {/* CARD GRID */}
-      <div className="grid grid-cols-4 gap-5 font-bold m-6 select-none relative">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 font-bold m-6 select-none relative">
         {sortedRecipes.length === 0 && (
-          <div className="col-span-4 flex flex-col items-center justify-center text-center py-40">
+          <div className="col-span-full flex flex-col items-center justify-center text-center py-40">
             <FontAwesomeIcon
               icon={faFilterCircleXmark}
               className="text-7xl mb-4 text-zinc-700 dark:text-zinc-500 opacity-80"
@@ -892,7 +892,7 @@ export default function CookPotKeg() {
             )}
           </div>
           <div
-            className="bg-white dark:bg-zinc-900 rounded-2xl p-8 w-[750px] relative shadow-xl dark:shadow-none scale-95"
+            className="bg-white dark:bg-zinc-900 rounded-2xl p-8 w-11/12 md:w-[750px] relative shadow-xl dark:shadow-none scale-95"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end">
