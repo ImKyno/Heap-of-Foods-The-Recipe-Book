@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { useTranslation } from "@/lib/i18n";
 import { usePageTitle } from "@/components/PageTitle";
 import RandomRecipe from "../components/RandomRecipe";
+import DailyRecipe from "../components/DailyRecipe";
 
 import recipes from "@/data/recipes_cookpot.json";
 import recipes_warly from "@/data/recipes_cookpot_warly.json";
@@ -321,6 +322,13 @@ export default function HomePage() {
             label={t("main.ingredients")}
             href="/ingredients"
           />
+        </div>
+
+        <div className="w-full h-1 bg-zinc-700/20 dark:bg-white/20" />
+
+        {/* DAILY RECIPE */}
+        <div className="flex justify-center items-center px-4 py-7 w-full">
+          <DailyRecipe />
         </div>
 
         <div className="w-full h-1 bg-zinc-700/20 dark:bg-white/20" />

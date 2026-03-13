@@ -44,6 +44,10 @@ const en = {
   pages: {
     home: {
       title: "Home",
+      daily: {
+        title: "Recipe of the Day",
+        timer: "Next Recipe in:",
+      },
     },
     cookpot: {
       title: "Crock Pot",
