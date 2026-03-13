@@ -19,6 +19,7 @@ import {
   faMagnifyingGlass,
   faCircleQuestion,
   faGear,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { faDiscord, faSteam, faKoFi } from "@fortawesome/free-brands-svg-icons";
 
@@ -347,6 +348,11 @@ export default function HomePage() {
             label={t("footer.discord")}
             href="https://discord.gg/jjNr4Vvutn"
           />
+          <LocalButton
+            icon={faUsers}
+            label={t("footer.contributors")}
+            href="/contributors"
+          />
           <ExternalButton
             icon={faKoFi}
             label={t("footer.kofi")}
@@ -393,6 +399,28 @@ function ExternalButton({ icon, label, href }: any) {
       target="_blank"
       className="
       bg-zinc-100 dark:bg-zinc-900
+      px-6 py-4
+      rounded-xl
+      flex items-center gap-3
+      font-bold
+      text-lg
+      hover:scale-105
+      transition
+      shadow
+      "
+    >
+      <FontAwesomeIcon icon={icon} />
+      {label}
+    </a>
+  );
+}
+
+function LocalButton({ icon, label, href }: any) {
+  return (
+    <a
+      href={href}
+      className="
+        bg-zinc-100 dark:bg-zinc-900
       px-6 py-4
       rounded-xl
       flex items-center gap-3
