@@ -10,6 +10,7 @@ import recipes from "@/data/recipes_cookpot.json";
 import { recommendRecipe } from "@/lib/recommend";
 import SeeAlso from "@/components/SeeAlso";
 import AnimatedOverlay from "@/components/AnimatedOverlay";
+import SkeletonImage from "@/components/SkeletonImage";
 import Fuse from "fuse.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -812,7 +813,7 @@ export default function CookPot() {
             onClick={() => setSelected(recipe)}
             className="bg-white dark:bg-zinc-900 rounded-2xl p-3 flex flex-col items-center gap-3 cursor-pointer hover:scale-105 transition shadow-sm dark:shadow-none w-full sm:w-64"
           >
-            <img src={getAssetPath(`/foods_cookpot/${recipe.name}.png`)} className="w-24" />
+            <SkeletonImage src={getAssetPath(`/foods_cookpot/${recipe.name}.png`)} className="w-24 h-24" />
             <h2 className="text-center font-semibold text-lg text-zinc-900 dark:text-white">
               {t(`recipes.${recipe.name}`)}
             </h2>
@@ -893,9 +894,9 @@ export default function CookPot() {
               </button>
             </div>
 
-            <img
+            <SkeletonImage
               src={getAssetPath(`/foods_cookpot/${selected.name}.png`)}
-              className="w-24 mx-auto mb-4"
+              className="w-24 h-24 mx-auto mb-4"
             />
 
             <h2 className="text-center text-2xl font-semibold">

@@ -8,6 +8,7 @@ import { usePageTitle } from "@/components/PageTitle";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import ingredients from "@/data/ingredients.json";
+import SkeletonImage from "@/components/SkeletonImage";
 import Fuse from "fuse.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -795,9 +796,9 @@ function IngredientsContent() {
             onClick={() => setSelected(ingredient)}
             className="bg-white dark:bg-zinc-900 rounded-2xl p-3 flex flex-col items-center gap-3 cursor-pointer hover:scale-105 transition shadow-sm dark:shadow-none w-full sm:w-48"
           >
-            <img
+            <SkeletonImage
               src={getAssetPath(`/icons/ingredients/ingredient_${ingredient.name}.png`)}
-              className="w-15"
+              className="w-15 h-15"
             />
             <h2 className="text-center font-semibold text-lg text-zinc-900 dark:text-white">
               {t(`ingredients.${ingredient.name}`)}
@@ -880,9 +881,9 @@ function IngredientsContent() {
                       key={variant.type}
                       className="flex flex-col items-center"
                     >
-                      <img
+                      <SkeletonImage
                         src={getAssetPath(`/icons/ingredients/ingredient_${selected.name}${variant.type === "normal" ? "" : `_${variant.type}`}.png`)}
-                        className="w-20 h-20 object-contain"
+                        className="w-20 h-20"
                       />
                       <span className="text-sm font-semibold text-zinc-900 dark:text-white mt-1 text-center">
                         {variant.type === "normal"
