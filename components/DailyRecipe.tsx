@@ -47,27 +47,27 @@ export default function DailyRecipe() {
     cookpot: {
       icon: getAssetPath("/icons/misc/icon_cookpot.png"),
       name: t("main.cookpot"),
-      page: "heap-of-foods-recipe-book/recipes_cookpot",
+      page: "/recipes_cookpot",
     },
     warly: {
       icon: getAssetPath("/icons/misc/icon_cookpot_warly.png"),
       name: t("main.cookpot_warly"),
-      page: "heap-of-foods-recipe-book/recipes_warly",
+      page: "/recipes_warly",
     },
     keg: {
       icon: getAssetPath("/icons/misc/icon_cookpot_keg.png"),
       name: t("main.cookpot_keg"),
-      page: "heap-of-foods-recipe-book/recipes_keg",
+      page: "/recipes_keg",
     },
     jar: {
       icon: getAssetPath("/icons/misc/icon_cookpot_jar.png"),
       name: t("main.cookpot_jar"),
-      page: "heap-of-foods-recipe-book/recipes_jar",
+      page: "/recipes_jar",
     },
     seasonal: {
       icon: getAssetPath("/icons/misc/icon_cookpot_seasonal.png"),
       name: t("main.cookpot_seasonal"),
-      page: "heap-of-foods-recipe-book/recipes_seasonal",
+      page: "/recipes_seasonal",
     },
   } as const;
 

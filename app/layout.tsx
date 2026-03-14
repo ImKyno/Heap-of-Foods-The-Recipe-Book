@@ -12,6 +12,8 @@ import { useTranslation } from "@/lib/i18n";
 
 config.autoAddCss = false;
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -31,9 +33,9 @@ export const metadata: Metadata = {
   publisher: "Kyno",
   icons: {
     icon: [
-      { url: "/icons/misc/icon_hof.png?v=2", sizes: "16x16", type: "image/png" },
-      { url: "/icons/misc/icon_hof.png?v=2", sizes: "32x32", type: "image/png" },
-      { url: "/icons/misc/icon_hof.png?v=2", sizes: "48x48", type: "image/png" }
+      { url: `${base}/icons/misc/icon_hof.png?v=2`, sizes: "16x16", type: "image/png" },
+      { url: `${base}/icons/misc/icon_hof.png?v=2`, sizes: "32x32", type: "image/png" },
+      { url: `${base}/icons/misc/icon_hof.png?v=2`, sizes: "48x48", type: "image/png" }
     ],
     apple: [
       { url: "/icons/misc/icon_hof.png", sizes: "180x180", type: "image/png" }

@@ -168,7 +168,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-zinc-300 dark:bg-zinc-800 text-zinc-900 dark:text-white flex justify-center relative">
       {/* SETTINGS BUTTON */}
       <div className="fixed top-4 right-4 z-50">
-        <Link href="heap-of-foods-recipe-book/settings">
+        <Link href="/settings">
           <button className="flex items-center gap-2 px-3 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-400 dark:hover:bg-zinc-700 transition font-bold cursor-pointer">
             <FontAwesomeIcon icon={faGear} className="w-6 h-6" />
           </button>
@@ -299,32 +299,32 @@ export default function HomePage() {
           <CategoryCard
             icon={getAssetPath("/icons/misc/icon_cookpot.png")}
             label={t("main.cookpot")}
-            href="heap-of-foods-recipe-book/recipes_cookpot"
+            href="/recipes_cookpot"
           />
           <CategoryCard
             icon={getAssetPath("/icons/misc/icon_cookpot_warly.png")}
             label={t("main.cookpot_warly")}
-            href="heap-of-foods-recipe-book/recipes_warly"
+            href="/recipes_warly"
           />
           <CategoryCard
             icon={getAssetPath("/icons/misc/icon_cookpot_keg.png")}
             label={t("main.cookpot_keg")}
-            href="heap-of-foods-recipe-book/recipes_keg"
+            href="/recipes_keg"
           />
           <CategoryCard
             icon={getAssetPath("/icons/misc/icon_cookpot_jar.png")}
             label={t("main.cookpot_jar")}
-            href="heap-of-foods-recipe-book/recipes_jar"
+            href="/recipes_jar"
           />
           <CategoryCard
             icon={getAssetPath("/icons/misc/icon_cookpot_seasonal.png")}
             label={t("main.cookpot_seasonal")}
-            href="heap-of-foods-recipe-book/recipes_seasonal"
+            href="/recipes_seasonal"
           />
           <CategoryCard
             icon={getAssetPath("/icons/misc/icon_ingredients.png")}
             label={t("main.ingredients")}
-            href="heap-of-foods-recipe-book/ingredients"
+            href="/ingredients"
           />
         </div>
 
@@ -352,7 +352,7 @@ export default function HomePage() {
           <LocalButton
             icon={faUsers}
             label={t("footer.contributors")}
-            href="heap-of-foods-recipe-book/contributors"
+            href="/contributors"
           />
           <ExternalButton
             icon={faKoFi}
