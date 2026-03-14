@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/paths";
 
 import recipes from "@/data/recipes_cookpot.json";
 import recipes_warly from "@/data/recipes_cookpot_warly.json";
@@ -44,29 +45,29 @@ export default function DailyRecipe() {
 
   const SOURCE_INFO: Record<SourceKeys, { icon: string; name: string; page: string }> = {
     cookpot: {
-      icon: "/icons/misc/icon_cookpot.png",
+      icon: getAssetPath("/icons/misc/icon_cookpot.png"),
       name: t("main.cookpot"),
-      page: "/recipes_cookpot",
+      page: "heap-of-foods-recipe-book/recipes_cookpot",
     },
     warly: {
-      icon: "/icons/misc/icon_cookpot_warly.png",
+      icon: getAssetPath("/icons/misc/icon_cookpot_warly.png"),
       name: t("main.cookpot_warly"),
-      page: "/recipes_warly",
+      page: "heap-of-foods-recipe-book/recipes_warly",
     },
     keg: {
-      icon: "/icons/misc/icon_cookpot_keg.png",
+      icon: getAssetPath("/icons/misc/icon_cookpot_keg.png"),
       name: t("main.cookpot_keg"),
-      page: "/recipes_keg",
+      page: "heap-of-foods-recipe-book/recipes_keg",
     },
     jar: {
-      icon: "/icons/misc/icon_cookpot_jar.png",
+      icon: getAssetPath("/icons/misc/icon_cookpot_jar.png"),
       name: t("main.cookpot_jar"),
-      page: "/recipes_jar",
+      page: "heap-of-foods-recipe-book/recipes_jar",
     },
     seasonal: {
-      icon: "/icons/misc/icon_cookpot_seasonal.png",
+      icon: getAssetPath("/icons/misc/icon_cookpot_seasonal.png"),
       name: t("main.cookpot_seasonal"),
-      page: "/recipes_seasonal",
+      page: "heap-of-foods-recipe-book/recipes_seasonal",
     },
   } as const;
 
@@ -133,7 +134,7 @@ export default function DailyRecipe() {
 
       <div className="bg-white dark:bg-zinc-900 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full max-w-4xl shadow-md">
         <img
-          src={`/${recipe.icon}/${recipe.name}.png`}
+          src={getAssetPath(`/${recipe.icon}/${recipe.name}.png`)}
           className="w-24 h-24 sm:w-35 sm:h-35 object-contain flex-shrink-0 sm:ml-8"
         />
         <div className="flex flex-col flex-1 gap-4 items-center text-center">
@@ -163,23 +164,23 @@ export default function DailyRecipe() {
           </div>
 
           <div className="flex gap-2 justify-center flex-wrap">
-            <Stat icon="/icons/cooking/icon_health.png" value={recipe.health} tooltip={t("tooltips.health")} isStatus />
-            <Stat icon="/icons/cooking/icon_hunger.png" value={recipe.hunger} tooltip={t("tooltips.hunger")} isStatus />
-            <Stat icon="/icons/cooking/icon_sanity.png" value={recipe.sanity} tooltip={t("tooltips.sanity")} isStatus />
+            <Stat icon={getAssetPath("/icons/cooking/icon_health.png")} value={recipe.health} tooltip={t("tooltips.health")} isStatus />
+            <Stat icon={getAssetPath("/icons/cooking/icon_hunger.png")} value={recipe.hunger} tooltip={t("tooltips.hunger")} isStatus />
+            <Stat icon={getAssetPath("/icons/cooking/icon_sanity.png")} value={recipe.sanity} tooltip={t("tooltips.sanity")} isStatus />
           </div>
 
           <div className="flex gap-2 flex-wrap font-bold justify-center">
             {recipe.foodtype && <FoodType type={recipe.foodtype} t={t} />}
             {recipe.temperature != null && (
-              <TopEffect icon="/icons/cooking/icon_temperature.png" value={formatTemperature(recipe.temperature, recipe.temperatureDuration ?? 0)} tooltip={t("tooltips.temperature")} />
+              <TopEffect icon={getAssetPath("/icons/cooking/icon_temperature.png")} value={formatTemperature(recipe.temperature, recipe.temperatureDuration ?? 0)} tooltip={t("tooltips.temperature")} />
             )}
             {recipe.debuff && (
-              <TopEffect icon="/icons/cooking/icon_debuff.png" value={t(`recipes_debuff.${recipe.name}`)} tooltip={t("tooltips.debuff")} />
+              <TopEffect icon={getAssetPath("/icons/cooking/icon_debuff.png")} value={t(`recipes_debuff.${recipe.name}`)} tooltip={t("tooltips.debuff")} />
             )}
             {recipe.characterfood &&
               (Array.isArray(recipe.characterfood) ? recipe.characterfood : [recipe.characterfood])
                 .map((char) => (
-                  <TopEffect key={char} icon={`/icons/characters/character_${char}.png`} value={t(`characterfood.${char}`)} tooltip={t("tooltips.characterfood")} />
+                  <TopEffect key={char} icon={getAssetPath(`/icons/characters/character_${char}.png`)} value={t(`characterfood.${char}`)} tooltip={t("tooltips.characterfood")} />
                 ))}
           </div>
         </div>
@@ -266,7 +267,7 @@ function Stat({ icon, value, tooltip, isStatus = false, recipe, stat }: any) {
             {extra.characters.map((char) => (
               <img
                 key={char}
-                src={`/icons/characters/character_${char}.png`}
+                src={getAssetPath(`/icons/characters/character_${char}.png`)}
                 className="w-5 h-5"
               />
             ))}
@@ -296,7 +297,7 @@ function FoodType({ type, t }: FoodTypeProps) {
   return (
     <div className="relative group flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-xs tracking-wide cursor-default">
       <img
-        src="/icons/cooking/icon_foodtype.png"
+        src={getAssetPath("/icons/cooking/icon_foodtype.png")}
         className="w-5 h-5 object-contain"
       />
 

@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useTranslation } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/paths";
 import { usePageTitle } from "@/components/PageTitle";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -520,7 +521,7 @@ export default function CookPotSeasonal() {
                       }`}
                     >
                       <img
-                        src={`/foods_cookpot_seasonal/${recipe.name}.png`}
+                        src={getAssetPath(`/foods_cookpot_seasonal/${recipe.name}.png`)}
                         className="w-10 h-10 object-contain"
                       />
                       <span className="text-sm font-semibold">
@@ -594,7 +595,7 @@ export default function CookPotSeasonal() {
                   <div className="w-11/12 sm:w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
                     <DropdownGroup
                       title={t("filters.temperature")}
-                      icon="/icons/cooking/icon_temperature.png"
+                      icon={getAssetPath("/icons/cooking/icon_temperature.png")}
                     >
                       <CheckboxFilter
                         label={t("card.temperature.hot")}
@@ -623,7 +624,7 @@ export default function CookPotSeasonal() {
 
                     <DropdownGroup
                       title={t("filters.foodtype")}
-                      icon="/icons/cooking/icon_foodtype.png"
+                      icon={getAssetPath("/icons/cooking/icon_foodtype.png")}
                     >
                       {FOODTYPE_ORDER.filter((type) =>
                         recipes.some((r: any) => r.foodtype === type)
@@ -647,7 +648,7 @@ export default function CookPotSeasonal() {
 
                     <DropdownGroup
                       title={t("filters.debuff.title")}
-                      icon="/icons/cooking/icon_debuff.png"
+                      icon={getAssetPath("/icons/cooking/icon_debuff.png")}
                     >
                       <CheckboxFilter
                         label={t("filters.debuff.hasdebuff")}
@@ -662,7 +663,7 @@ export default function CookPotSeasonal() {
 
                     <DropdownGroup
                       title={t("filters.event")}
-                      icon="/icons/cooking/icon_event.png"
+                      icon={getAssetPath("/icons/cooking/icon_event.png")}
                     >
                       {["xmas", "halloween"].map((event) => (
                         <CheckboxFilter
@@ -701,7 +702,7 @@ export default function CookPotSeasonal() {
                   <div className="w-11/12 sm:w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-4 font-bold shadow-sm dark:shadow-none">
                     <DropdownGroup
                       title={t("sorting.directiontype")}
-                      icon="/icons/cooking/icon_priority.png"
+                      icon={getAssetPath("/icons/cooking/icon_priority.png")}
                     >
                       <CheckboxFilter
                         label={t("sorting.direction.up")}
@@ -719,7 +720,7 @@ export default function CookPotSeasonal() {
 
                     <DropdownGroup
                       title={t("sorting.ordertype")}
-                      icon="/icons/cooking/icon_debuff.png"
+                      icon={getAssetPath("/icons/cooking/icon_debuff.png")}
                     >
                       <CheckboxFilter
                         label={t("sorting.type.default")}
@@ -815,7 +816,7 @@ export default function CookPotSeasonal() {
             className="bg-white dark:bg-zinc-900 rounded-2xl p-3 flex flex-col items-center gap-3 cursor-pointer hover:scale-105 transition shadow-sm dark:shadow-none"
           >
             <img
-              src={`/foods_cookpot_seasonal/${recipe.name}.png`}
+              src={getAssetPath(`/foods_cookpot_seasonal/${recipe.name}.png`)}
               className="w-24"
             />
             <h2 className="text-center font-semibold text-lg text-zinc-900 dark:text-white">
@@ -826,7 +827,7 @@ export default function CookPotSeasonal() {
               {recipe.foodtype && <FoodType type={recipe.foodtype} t={t} />}
               {recipe.temperature != null && (
                 <TopEffect
-                  icon="/icons/cooking/icon_temperature.png"
+                  icon={getAssetPath("/icons/cooking/icon_temperature.png")}
                   value={
                     recipe.temperature > 0
                       ? t("card.temperature.hot")
@@ -837,14 +838,14 @@ export default function CookPotSeasonal() {
               )}
               {recipe.debuff && (
                 <TopEffect
-                  icon="/icons/cooking/icon_debuff.png"
+                  icon={getAssetPath("/icons/cooking/icon_debuff.png")}
                   value={t("card.debuff.hasEffect")}
                   tooltip={t("tooltips.debuff")}
                 />
               )}
               {GetFoodEvent(recipe.name) && (
                 <TopEffect
-                  icon="/icons/cooking/icon_event.png"
+                  icon={getAssetPath("/icons/cooking/icon_event.png")}
                   value={t(`card.event.${GetFoodEvent(recipe.name)}`)}
                   tooltip={t("tooltips.event")}
                 />
@@ -897,7 +898,7 @@ export default function CookPotSeasonal() {
             </div>
 
             <img
-              src={`/foods_cookpot_seasonal/${selected.name}.png`}
+              src={getAssetPath(`/foods_cookpot_seasonal/${selected.name}.png`)}
               className="w-24 mx-auto mb-4"
             />
 
@@ -950,7 +951,7 @@ export default function CookPotSeasonal() {
 
               {selected.temperature != null && (
                 <TopEffect
-                  icon="/icons/cooking/icon_temperature.png"
+                  icon={getAssetPath("/icons/cooking/icon_temperature.png")}
                   value={FormatTemperature(
                     selected.temperature,
                     selected.temperatureDuration,
@@ -961,7 +962,7 @@ export default function CookPotSeasonal() {
 
               {selected.debuff && (
                 <TopEffect
-                  icon="/icons/cooking/icon_debuff.png"
+                  icon={getAssetPath("/icons/cooking/icon_debuff.png")}
                   value={t(`recipes_debuff.${selected.name}`)}
                   tooltip={t("tooltips.debuff")}
                 />
@@ -969,7 +970,7 @@ export default function CookPotSeasonal() {
 
               {GetFoodEvent(selected.name) && (
                 <TopEffect
-                  icon="/icons/cooking/icon_event.png"
+                  icon={getAssetPath("/icons/cooking/icon_event.png")}
                   value={t(`card.event.${GetFoodEvent(selected.name)}`)}
                   tooltip={t("tooltips.event")}
                 />
@@ -979,7 +980,7 @@ export default function CookPotSeasonal() {
             {/* STATUS */}
             <Block>
               <Stat
-                icon="/icons/cooking/icon_health.png"
+                icon={getAssetPath("/icons/cooking/icon_health.png")}
                 value={selected.health}
                 tooltip={t("tooltips.health")}
                 isStatus
@@ -987,7 +988,7 @@ export default function CookPotSeasonal() {
                 stat="health"
               />
               <Stat
-                icon="/icons/cooking/icon_hunger.png"
+                icon={getAssetPath("/icons/cooking/icon_hunger.png")}
                 value={selected.hunger}
                 tooltip={t("tooltips.hunger")}
                 isStatus
@@ -995,7 +996,7 @@ export default function CookPotSeasonal() {
                 stat="hunger"
               />
               <Stat
-                icon="/icons/cooking/icon_sanity.png"
+                icon={getAssetPath("/icons/cooking/icon_sanity.png")}
                 value={selected.sanity}
                 tooltip={t("tooltips.sanity")}
                 isStatus
@@ -1006,23 +1007,23 @@ export default function CookPotSeasonal() {
 
             <Block>
               <Stat
-                icon="/icons/cooking/icon_priority.png"
+                icon={getAssetPath("/icons/cooking/icon_priority.png")}
                 value={selected.priority}
                 tooltip={t("tooltips.priority")}
               />
               <Stat
-                icon="/icons/cooking/icon_cooktime.png"
+                icon={getAssetPath("/icons/cooking/icon_cooktime.png")}
                 value={FormatCookTime(selected.cooktime)}
                 tooltip={t("tooltips.cooktime")}
               />
               <Stat
-                icon="/icons/cooking/icon_spoilage.png"
+                icon={getAssetPath("/icons/cooking/icon_spoilage.png")}
                 value={GetSpoilageLabel(selected.spoilage)}
                 tooltip={t("tooltips.spoilage")}
               />
               {selected.stacksize && (
                 <Stat
-                  icon="/icons/cooking/icon_stacksize.png"
+                  icon={getAssetPath("/icons/cooking/icon_stacksize.png")}
                   value={selected.stacksize}
                   tooltip={t("tooltips.stacksize")}
                 />
@@ -1252,7 +1253,7 @@ function Stat({ icon, value, tooltip, isStatus = false, recipe, stat }: any) {
       {extra.characters.map((char, index) => (
         <span key={char} className="flex items-center font-bold">
           <img
-            src={`/icons/characters/character_${char}.png`}
+            src={getAssetPath(`/icons/characters/character_${char}.png`)}
             className="w-7 h-7"
           />
           {index < extra.characters.length - 1 && ""}
@@ -1283,7 +1284,7 @@ function FoodType({ type, t }: { type: string; t: (key: string) => string }) {
   return (
     <div className="relative group flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-xs tracking-wide cursor-default">
       <img
-        src="/icons/cooking/icon_foodtype.png"
+        src={getAssetPath("/icons/cooking/icon_foodtype.png")}
         className="w-5 h-5 object-contain"
       />
       <span className="text-zinc-900 dark:text-white">
@@ -1399,7 +1400,7 @@ function IngredientIconWithCount({
     <div className="flex flex-col items-center font-bold group relative">
       <div className="w-10 h-10 relative">
         <img
-          src={`/icons/ingredients/${iconName}.png`}
+          src={getAssetPath(`/icons/ingredients/${iconName}.png`)}
           className="w-full h-full object-contain"
         />
 

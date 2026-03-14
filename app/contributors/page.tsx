@@ -2,6 +2,7 @@
 
 import { useTranslation } from "@/lib/i18n";
 import { usePageTitle } from "@/components/PageTitle";
+import { getAssetPath } from "@/lib/paths";
 import contributors from "@/data/contributors.json";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -127,7 +128,7 @@ export default function ContributorsPage() {
               <div className="flex items-center gap-3 w-full">
                 <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-zinc-200 dark:bg-zinc-700">
                   <img
-                    src={contributor.image}
+                    src={getAssetPath(contributor.image)}
                     alt={contributor.name}
                     className="w-full h-full object-cover"
                   />
@@ -139,7 +140,7 @@ export default function ContributorsPage() {
                     </h2>
                     {contributor.specialIcon && (
                       <img
-                        src={contributor.specialIcon}
+                        src={getAssetPath(contributor.specialIcon)}
                         alt="special icon"
                         className="w-6 h-6"
                       />

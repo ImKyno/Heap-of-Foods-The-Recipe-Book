@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useTranslation } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/paths";
 import { usePageTitle } from "@/components/PageTitle";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -553,7 +554,7 @@ function IngredientsContent() {
                       }`}
                     >
                       <img
-                        src={`/icons/ingredients/ingredient_${ingredient.name}${ingredient.variant === "normal" ? "" : `_${ingredient.variant}`}.png`}
+                        src={getAssetPath(`/icons/ingredients/ingredient_${ingredient.name}${ingredient.variant === "normal" ? "" : `_${ingredient.variant}`}.png`)}
                         className="w-10 h-10 object-contain"
                       />
                       <span className="text-sm font-semibold">
@@ -628,7 +629,7 @@ function IngredientsContent() {
                     <div className="max-h-[420px] overflow-y-auto overscroll-contain p-4 flex flex-col gap-2 font-bold">
                       <DropdownGroup
                         title={t("filters.foodtype")}
-                        icon="/icons/cooking/icon_foodtype.png"
+                        icon={getAssetPath("/icons/cooking/icon_foodtype.png")}
                       >
                         <div className="grid grid-cols-[max-content_max-content] gap-x-9 gap-y-2">
                           {uniqueFoodTypes.map((type: string) => (
@@ -650,7 +651,7 @@ function IngredientsContent() {
                       </DropdownGroup>
                       <DropdownGroup
                         title={t("filters.cooktype")}
-                        icon="/icons/cooking/icon_cooktype.png"
+                        icon={getAssetPath("/icons/cooking/icon_cooktype.png")}
                       >
                         <div className="grid grid-cols-5 gap-x-0 gap-y-2">
                           {uniqueCookTypes.map((value: string) => (
@@ -689,7 +690,7 @@ function IngredientsContent() {
                   <div className="w-11/12 sm:w-[300px] bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col gap-3 font-bold shadow-sm dark:shadow-none">
                     <DropdownGroup
                       title={t("sorting.directiontype")}
-                      icon="/icons/cooking/icon_priority.png"
+                      icon={getAssetPath("/icons/cooking/icon_priority.png")}
                     >
                       <CheckboxFilter
                         label={t("sorting.direction.up")}
@@ -707,7 +708,7 @@ function IngredientsContent() {
 
                     <DropdownGroup
                       title={t("sorting.ordertype")}
-                      icon="/icons/cooking/icon_debuff.png"
+                      icon={getAssetPath("/icons/cooking/icon_debuff.png")}
                     >
                       <CheckboxFilter
                         label={t("sorting.type.default")}
@@ -794,7 +795,7 @@ function IngredientsContent() {
             className="bg-white dark:bg-zinc-900 rounded-2xl p-3 flex flex-col items-center gap-3 cursor-pointer hover:scale-105 transition shadow-sm dark:shadow-none"
           >
             <img
-              src={`/icons/ingredients/ingredient_${ingredient.name}.png`}
+              src={getAssetPath(`/icons/ingredients/ingredient_${ingredient.name}.png`)}
               className="w-15"
             />
             <h2 className="text-center font-semibold text-lg text-zinc-900 dark:text-white">
@@ -879,7 +880,7 @@ function IngredientsContent() {
                       className="flex flex-col items-center"
                     >
                       <img
-                        src={`/icons/ingredients/ingredient_${selected.name}${variant.type === "normal" ? "" : `_${variant.type}`}.png`}
+                        src={getAssetPath(`/icons/ingredients/ingredient_${selected.name}${variant.type === "normal" ? "" : `_${variant.type}`}.png`)}
                         className="w-20 h-20 object-contain"
                       />
                       <span className="text-sm font-semibold text-zinc-900 dark:text-white mt-1 text-center">
@@ -921,28 +922,28 @@ function IngredientsContent() {
 
                     <Block>
                       <Stat
-                        icon="/icons/cooking/icon_health.png"
+                        icon={getAssetPath("/icons/cooking/icon_health.png")}
                         value={getVariantValue(selected.health, i)}
                         tooltip={t("tooltips.health")}
                         isStatus
                       />
 
                       <Stat
-                        icon="/icons/cooking/icon_hunger.png"
+                        icon={getAssetPath("/icons/cooking/icon_hunger.png")}
                         value={getVariantValue(selected.hunger, i)}
                         tooltip={t("tooltips.hunger")}
                         isStatus
                       />
 
                       <Stat
-                        icon="/icons/cooking/icon_sanity.png"
+                        icon={getAssetPath("/icons/cooking/icon_sanity.png")}
                         value={getVariantValue(selected.sanity, i)}
                         tooltip={t("tooltips.sanity")}
                         isStatus
                       />
 
                       <Stat
-                        icon="/icons/cooking/icon_spoilage.png"
+                        icon={getAssetPath("/icons/cooking/icon_spoilage.png")}
                         value={GetSpoilageLabel(
                           getVariantValue(selected.spoilage, i),
                         )}
@@ -1090,7 +1091,7 @@ function FoodType({ type, t }: { type: string; t: (key: string) => string }) {
   return (
     <div className="relative group flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-xs tracking-wide cursor-default">
       <img
-        src="/icons/cooking/icon_foodtype.png"
+        src={getAssetPath("/icons/cooking/icon_foodtype.png")}
         className="w-5 h-5 object-contain"
       />
       <span className="text-zinc-900 dark:text-white">
@@ -1117,7 +1118,7 @@ function CookType({
   return (
     <div className="relative group flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-xs tracking-wide cursor-default">
       <img
-        src="/icons/cooking/icon_cooktype.png"
+        src={getAssetPath("/icons/cooking/icon_cooktype.png")}
         className="w-5 h-5 object-contain"
       />
 

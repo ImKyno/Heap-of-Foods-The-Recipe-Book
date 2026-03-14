@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useTranslation } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/paths";
 import { usePageTitle } from "@/components/PageTitle";
 import { useRouter } from "next/navigation";
 import RandomRecipe from "../components/RandomRecipe";
@@ -167,7 +168,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-zinc-300 dark:bg-zinc-800 text-zinc-900 dark:text-white flex justify-center relative">
       {/* SETTINGS BUTTON */}
       <div className="fixed top-4 right-4 z-50">
-        <Link href="/settings">
+        <Link href="heap-of-foods-recipe-book/settings">
           <button className="flex items-center gap-2 px-3 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-400 dark:hover:bg-zinc-700 transition font-bold cursor-pointer">
             <FontAwesomeIcon icon={faGear} className="w-6 h-6" />
           </button>
@@ -180,7 +181,7 @@ export default function HomePage() {
         <div className="mt-10 mb-5 flex flex-col items-center text-center">
           <div className="flex items-center gap-4">
             <img
-              src="/icons/misc/icon_hof.png"
+              src={getAssetPath("/icons/misc/icon_hof.png")}
               className="w-20 h-20 sm:w-[120px] sm:h-[120px] drop-shadow-lg"
             />
             <div className="flex flex-col items-center text-center drop-shadow-md">
@@ -261,14 +262,14 @@ export default function HomePage() {
                       <img
                         src={
                           item.type === "ingredients"
-                            ? `/icons/ingredients/ingredient_${item.name}${
+                            ? getAssetPath(`/icons/ingredients/ingredient_${item.name}${
                                 item.variant === "normal"
                                   ? ""
                                   : `_${item.variant}`
-                              }.png`
+                              }.png`)
                             : item.type === "recipes_seasonal"
-                              ? `/foods_cookpot_seasonal/${item.name}.png`
-                              : `${item.icon}/${item.name}.png`
+                              ? getAssetPath(`/foods_cookpot_seasonal/${item.name}.png`)
+                              : getAssetPath(`${item.icon}/${item.name}.png`)
                         }
                         className="w-10 h-10 object-contain"
                       />
@@ -296,34 +297,34 @@ export default function HomePage() {
         {/* CATEGORIES */}
         <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-20 mb-6 w-full justify-items-center drop-shadow-md">
           <CategoryCard
-            icon="/icons/misc/icon_cookpot.png"
+            icon={getAssetPath("/icons/misc/icon_cookpot.png")}
             label={t("main.cookpot")}
-            href="/recipes_cookpot"
+            href="heap-of-foods-recipe-book/recipes_cookpot"
           />
           <CategoryCard
-            icon="/icons/misc/icon_cookpot_warly.png"
+            icon={getAssetPath("/icons/misc/icon_cookpot_warly.png")}
             label={t("main.cookpot_warly")}
-            href="/recipes_warly"
+            href="heap-of-foods-recipe-book/recipes_warly"
           />
           <CategoryCard
-            icon="/icons/misc/icon_cookpot_keg.png"
+            icon={getAssetPath("/icons/misc/icon_cookpot_keg.png")}
             label={t("main.cookpot_keg")}
-            href="/recipes_keg"
+            href="heap-of-foods-recipe-book/recipes_keg"
           />
           <CategoryCard
-            icon="/icons/misc/icon_cookpot_jar.png"
+            icon={getAssetPath("/icons/misc/icon_cookpot_jar.png")}
             label={t("main.cookpot_jar")}
-            href="/recipes_jar"
+            href="heap-of-foods-recipe-book/recipes_jar"
           />
           <CategoryCard
-            icon="/icons/misc/icon_cookpot_seasonal.png"
+            icon={getAssetPath("/icons/misc/icon_cookpot_seasonal.png")}
             label={t("main.cookpot_seasonal")}
-            href="/recipes_seasonal"
+            href="heap-of-foods-recipe-book/recipes_seasonal"
           />
           <CategoryCard
-            icon="/icons/misc/icon_ingredients.png"
+            icon={getAssetPath("/icons/misc/icon_ingredients.png")}
             label={t("main.ingredients")}
-            href="/ingredients"
+            href="heap-of-foods-recipe-book/ingredients"
           />
         </div>
 
@@ -351,7 +352,7 @@ export default function HomePage() {
           <LocalButton
             icon={faUsers}
             label={t("footer.contributors")}
-            href="/contributors"
+            href="heap-of-foods-recipe-book/contributors"
           />
           <ExternalButton
             icon={faKoFi}

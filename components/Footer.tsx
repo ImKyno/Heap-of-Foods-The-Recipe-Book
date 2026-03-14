@@ -46,7 +46,7 @@ export function Footer() {
             </a>
 
             <a
-              href="/contributors"
+              href="contributors"
               className="flex items-center gap-2 hover:text-grey transition"
             >
               <FontAwesomeIcon icon={faUsers} />
