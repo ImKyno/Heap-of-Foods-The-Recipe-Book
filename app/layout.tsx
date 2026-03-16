@@ -25,12 +25,36 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  // title: "Heap of Foods - Recipe Book",
-  description: "A complete recipes sheet for the Heap of Foods Mod!",
+  metadataBase: new URL("https://heap-of-foods.com"),
+
+  // title: "Heap of Foods",
+  description: "A complete recipes sheet for the Heap of Foods Mod! Discover and look up recipes and ingredients easily.",
   keywords: ["Don't Starve Together", "Heap of Foods", "Heaps of Food", "Heaps of Foods", "HoF", "Kyno"],
   authors: [{ name: "Kyno" }],
   creator: "Kyno",
   publisher: "Kyno",
+  openGraph: {
+    title: "Heap of Foods",
+    description: "A complete recipes sheet for the Heap of Foods Mod! Discover and look up recipes and ingredients easily.",
+    url: "https://heap-of-foods.com",
+    siteName: "Heap of Foods",
+    images: [
+      {
+        url: "/icons/misc/icon_hof.png",
+        width: 512,
+        height: 512,
+        alt: "Heap of Foods",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Heap of Foods",
+    description: "A complete recipes sheet for the Heap of Foods Mod! Discover and look up recipes and ingredients easily.",
+    images: ["/icons/misc/icon_hof.png"],
+  },
   icons: {
     icon: [
       { url: `${base}/icons/misc/icon_hof.png?v=2`, sizes: "16x16", type: "image/png" },

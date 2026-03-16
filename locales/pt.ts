@@ -57,12 +57,15 @@ const pt = {
 
   pages: {
     home: {
-      title: "Inicio",
+      title: "Início",
       daily: {
         title: "Receita do Dia",
         timer: "Próxima Receita em:",
         details: "Ver mais detalhes",
       },
+    },
+    contributors: {
+      title: "Contribuidores",
     },
     cookpot: {
       title: "Panela",
